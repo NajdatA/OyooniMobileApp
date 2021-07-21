@@ -238,7 +238,6 @@ class BaseRepositoryImpl implements BaseRepository {
 
   @override
   Future<Either<Failure, String>> getRefreshToken() {
-    // TODO: implement getRefreshToken
     throw UnimplementedError();
   }
 

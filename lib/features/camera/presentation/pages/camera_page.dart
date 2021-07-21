@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:document_scanner/document_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:senior_project/core/util/constants.dart';
@@ -75,7 +78,10 @@ class _CameraPageState extends State<CameraPage> {
           camera == null || camera.value == null ? Center(child: CircularProgressIndicator(),) :
         Scaffold(
           body: GestureDetector(
-            onDoubleTap: () {},
+            onDoubleTap: () async {
+              final image = await camera.takePicture();
+              
+            },
             onTap: () async {
               await tts.stop();
               print('jajaja');
