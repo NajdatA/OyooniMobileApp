@@ -17,7 +17,7 @@ import 'package:senior_project/features/splash/domain/repository/splash_reposito
 class GetUser extends UseCase<String, NoParams> {
   final SplashRepository repository;
 
-  GetUser({@required this.repository}) : assert(repository != null);
+  GetUser({required this.repository});
 
   @override
   Future<Either<Failure, String>> call(params) async {

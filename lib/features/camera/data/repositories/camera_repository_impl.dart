@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/core/data/model/base_local_data_source.dart';
@@ -20,16 +18,16 @@ class CameraRepositoryImpl extends BaseRepositoryImpl
   final BaseLocalDataSource baseLocalDataSource;
 
   CameraRepositoryImpl(
-      {@required this.cameraRemoteDataSource,
-        @required this.baseLocalDataSource,
-        @required NetworkInfo networkInfo})
+      {required this.cameraRemoteDataSource,
+        required this.baseLocalDataSource,
+        required NetworkInfo networkInfo})
       : super(
       baseRemoteDataSource: cameraRemoteDataSource,
       baseLocalDataSource: baseLocalDataSource,
       networkInfo: networkInfo);
 
   @override
-  Future<Either<Failure, String>> textRecognition(File image) {
+  Future<Either<Failure, String>> textRecognition(String image) {
     return checkNetwork(() async {
       try {
         final result =
@@ -37,7 +35,7 @@ class CameraRepositoryImpl extends BaseRepositoryImpl
         if (result == null || result.data == null)
           return Left(ServerFailure(ErrorCode.SERVER_ERROR));
         else {
-          return Right(result.data);
+          return Right(result.data!);
         }
       } on ServerException catch (e) {
         return Left(ServerFailure(e.errorCode));
@@ -46,7 +44,7 @@ class CameraRepositoryImpl extends BaseRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, String>> imageCaptioning(File image) {
+  Future<Either<Failure, String>> imageCaptioning(String image) {
     return checkNetwork(() async {
       try {
         final result =
@@ -54,7 +52,7 @@ class CameraRepositoryImpl extends BaseRepositoryImpl
         if (result == null || result.data == null)
           return Left(ServerFailure(ErrorCode.SERVER_ERROR));
         else {
-          return Right(result.data);
+          return Right(result.data!.caption);
         }
       } on ServerException catch (e) {
         return Left(ServerFailure(e.errorCode));
@@ -63,7 +61,7 @@ class CameraRepositoryImpl extends BaseRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, int>> banknoteRecognition(File image) {
+  Future<Either<Failure, int>> banknoteRecognition(String image) {
     return checkNetwork(() async {
       try {
         final result =
@@ -71,7 +69,24 @@ class CameraRepositoryImpl extends BaseRepositoryImpl
         if (result == null || result.data == null)
           return Left(ServerFailure(ErrorCode.SERVER_ERROR));
         else {
-          return Right(result.data);
+          return Right(result.data!.bankNoteType);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.errorCode));
+      }
+    });
+  }
+
+  @override
+  Future<Either<Failure, int>> colorRecognition(String image) {
+    return checkNetwork(() async {
+      try {
+        final result =
+        await cameraRemoteDataSource.colorRecognition(image);
+        if (result == null || result.data == null)
+          return Left(ServerFailure(ErrorCode.SERVER_ERROR));
+        else {
+          return Right(result.data!.recognizedColor);
         }
       } on ServerException catch (e) {
         return Left(ServerFailure(e.errorCode));

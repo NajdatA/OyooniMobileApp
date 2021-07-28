@@ -8,14 +8,14 @@ class IncomingCallCardWidget extends StatefulWidget {
   final String id;
   final SignalRConnectionBloc bloc;
 
-  const IncomingCallCardWidget({Key key, this.id, this.bloc}) : super(key: key);
+  const IncomingCallCardWidget({Key? key, required this.id, required this.bloc}) : super(key: key);
 
   @override
   _IncomingCallCardWidgetState createState() => _IncomingCallCardWidgetState();
 }
 
 class _IncomingCallCardWidgetState extends State<IncomingCallCardWidget> {
-  Timer timer;
+  Timer? timer;
   int time = 0;
   String waitTime = '00:00';
 
@@ -47,7 +47,7 @@ class _IncomingCallCardWidgetState extends State<IncomingCallCardWidget> {
 
   @override
   void dispose() {
-    timer.cancel();
+    timer!.cancel();
     super.dispose();
   }
 
@@ -66,7 +66,7 @@ class _IncomingCallCardWidgetState extends State<IncomingCallCardWidget> {
             // color: Colors.orange[50],
             borderRadius: BorderRadius.circular(30),
             gradient: LinearGradient(
-              colors: [Colors.white, Colors.orange[50]],
+              colors: [Colors.white, Colors.orange[50]!],
               stops: [0.2, 0.4],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -78,7 +78,7 @@ class _IncomingCallCardWidgetState extends State<IncomingCallCardWidget> {
                   blurRadius: 3,
                   offset: Offset(-1, -1)),
               BoxShadow(
-                  color: Colors.orange[100],
+                  color: Colors.orange[100]!,
                   spreadRadius: 1,
                   blurRadius: 3,
                   offset: Offset(2, 2)),

@@ -10,27 +10,29 @@ class _$CameraState extends CameraState {
   @override
   final bool isLoading;
   @override
-  final String recognizedText;
+  final String? recognizedText;
   @override
-  final String captionedImage;
+  final String? captionedImage;
   @override
-  final String recognizedBanknote;
+  final String? recognizedBanknote;
   @override
-  final ErrorCode error;
+  final String? recognizedColor;
+  @override
+  final ErrorCode? error;
 
-  factory _$CameraState([void Function(CameraStateBuilder) updates]) =>
+  factory _$CameraState([void Function(CameraStateBuilder)? updates]) =>
       (new CameraStateBuilder()..update(updates)).build();
 
   _$CameraState._(
-      {this.isLoading,
+      {required this.isLoading,
       this.recognizedText,
       this.captionedImage,
       this.recognizedBanknote,
+      this.recognizedColor,
       this.error})
       : super._() {
-    if (isLoading == null) {
-      throw new BuiltValueNullFieldError('CameraState', 'isLoading');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        isLoading, 'CameraState', 'isLoading');
   }
 
   @override
@@ -48,6 +50,7 @@ class _$CameraState extends CameraState {
         recognizedText == other.recognizedText &&
         captionedImage == other.captionedImage &&
         recognizedBanknote == other.recognizedBanknote &&
+        recognizedColor == other.recognizedColor &&
         error == other.error;
   }
 
@@ -55,9 +58,11 @@ class _$CameraState extends CameraState {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, isLoading.hashCode), recognizedText.hashCode),
-                captionedImage.hashCode),
-            recognizedBanknote.hashCode),
+            $jc(
+                $jc($jc($jc(0, isLoading.hashCode), recognizedText.hashCode),
+                    captionedImage.hashCode),
+                recognizedBanknote.hashCode),
+            recognizedColor.hashCode),
         error.hashCode));
   }
 
@@ -68,46 +73,54 @@ class _$CameraState extends CameraState {
           ..add('recognizedText', recognizedText)
           ..add('captionedImage', captionedImage)
           ..add('recognizedBanknote', recognizedBanknote)
+          ..add('recognizedColor', recognizedColor)
           ..add('error', error))
         .toString();
   }
 }
 
 class CameraStateBuilder implements Builder<CameraState, CameraStateBuilder> {
-  _$CameraState _$v;
+  _$CameraState? _$v;
 
-  bool _isLoading;
-  bool get isLoading => _$this._isLoading;
-  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
-  String _recognizedText;
-  String get recognizedText => _$this._recognizedText;
-  set recognizedText(String recognizedText) =>
+  String? _recognizedText;
+  String? get recognizedText => _$this._recognizedText;
+  set recognizedText(String? recognizedText) =>
       _$this._recognizedText = recognizedText;
 
-  String _captionedImage;
-  String get captionedImage => _$this._captionedImage;
-  set captionedImage(String captionedImage) =>
+  String? _captionedImage;
+  String? get captionedImage => _$this._captionedImage;
+  set captionedImage(String? captionedImage) =>
       _$this._captionedImage = captionedImage;
 
-  String _recognizedBanknote;
-  String get recognizedBanknote => _$this._recognizedBanknote;
-  set recognizedBanknote(String recognizedBanknote) =>
+  String? _recognizedBanknote;
+  String? get recognizedBanknote => _$this._recognizedBanknote;
+  set recognizedBanknote(String? recognizedBanknote) =>
       _$this._recognizedBanknote = recognizedBanknote;
 
-  ErrorCode _error;
-  ErrorCode get error => _$this._error;
-  set error(ErrorCode error) => _$this._error = error;
+  String? _recognizedColor;
+  String? get recognizedColor => _$this._recognizedColor;
+  set recognizedColor(String? recognizedColor) =>
+      _$this._recognizedColor = recognizedColor;
+
+  ErrorCode? _error;
+  ErrorCode? get error => _$this._error;
+  set error(ErrorCode? error) => _$this._error = error;
 
   CameraStateBuilder();
 
   CameraStateBuilder get _$this {
-    if (_$v != null) {
-      _isLoading = _$v.isLoading;
-      _recognizedText = _$v.recognizedText;
-      _captionedImage = _$v.captionedImage;
-      _recognizedBanknote = _$v.recognizedBanknote;
-      _error = _$v.error;
+    final $v = _$v;
+    if ($v != null) {
+      _isLoading = $v.isLoading;
+      _recognizedText = $v.recognizedText;
+      _captionedImage = $v.captionedImage;
+      _recognizedBanknote = $v.recognizedBanknote;
+      _recognizedColor = $v.recognizedColor;
+      _error = $v.error;
       _$v = null;
     }
     return this;
@@ -115,14 +128,12 @@ class CameraStateBuilder implements Builder<CameraState, CameraStateBuilder> {
 
   @override
   void replace(CameraState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CameraState;
   }
 
   @override
-  void update(void Function(CameraStateBuilder) updates) {
+  void update(void Function(CameraStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -130,10 +141,12 @@ class CameraStateBuilder implements Builder<CameraState, CameraStateBuilder> {
   _$CameraState build() {
     final _$result = _$v ??
         new _$CameraState._(
-            isLoading: isLoading,
+            isLoading: BuiltValueNullFieldError.checkNotNull(
+                isLoading, 'CameraState', 'isLoading'),
             recognizedText: recognizedText,
             captionedImage: captionedImage,
             recognizedBanknote: recognizedBanknote,
+            recognizedColor: recognizedColor,
             error: error);
     replace(_$result);
     return _$result;

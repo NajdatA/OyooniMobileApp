@@ -19,7 +19,7 @@ class SplashLocalDataSourceImpl extends BaseLocalDataSourceImpl
     implements SplashLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  SplashLocalDataSourceImpl({@required this.sharedPreferences});
+  SplashLocalDataSourceImpl({required this.sharedPreferences}) : super(sharedPreferences: sharedPreferences);
 
   @override
   Future<String> get getUser => Future.value(

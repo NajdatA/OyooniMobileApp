@@ -17,7 +17,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final GetUser getUser;
 
   SplashBloc({
-    @required this.getUser,
+    required this.getUser,
   }) : super(SplashState.initial());
 
   void onScreenAppeared() {

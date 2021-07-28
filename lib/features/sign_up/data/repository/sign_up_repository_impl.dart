@@ -16,9 +16,9 @@ class SignUpRepositoryImpl extends BaseRepositoryImpl
   final SignUpLocalDataSource signUpLocalDataSource;
 
   SignUpRepositoryImpl(
-      {@required this.signUpRemoteDataSource,
-      @required this.signUpLocalDataSource,
-      @required NetworkInfo networkInfo})
+      {required this.signUpRemoteDataSource,
+      required this.signUpLocalDataSource,
+      required NetworkInfo networkInfo})
       : super(
             baseLocalDataSource: signUpLocalDataSource,
             baseRemoteDataSource: signUpRemoteDataSource,
@@ -43,8 +43,8 @@ class SignUpRepositoryImpl extends BaseRepositoryImpl
           print("NNNNNNNNNNN");
           await signUpLocalDataSource.signUpUser(
             // result.data,
-            result.data.token,
-            result.data.refreshToken,
+            result.data!.token,
+            result.data!.refreshToken,
           );
           return Right(true);
         }

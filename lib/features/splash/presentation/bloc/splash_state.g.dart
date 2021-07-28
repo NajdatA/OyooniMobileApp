@@ -8,9 +8,9 @@ part of splash_state;
 
 class _$SplashState extends SplashState {
   @override
-  final String user;
+  final String? user;
 
-  factory _$SplashState([void Function(SplashStateBuilder) updates]) =>
+  factory _$SplashState([void Function(SplashStateBuilder)? updates]) =>
       (new SplashStateBuilder()..update(updates)).build();
 
   _$SplashState._({this.user}) : super._();
@@ -41,17 +41,18 @@ class _$SplashState extends SplashState {
 }
 
 class SplashStateBuilder implements Builder<SplashState, SplashStateBuilder> {
-  _$SplashState _$v;
+  _$SplashState? _$v;
 
-  String _user;
-  String get user => _$this._user;
-  set user(String user) => _$this._user = user;
+  String? _user;
+  String? get user => _$this._user;
+  set user(String? user) => _$this._user = user;
 
   SplashStateBuilder();
 
   SplashStateBuilder get _$this {
-    if (_$v != null) {
-      _user = _$v.user;
+    final $v = _$v;
+    if ($v != null) {
+      _user = $v.user;
       _$v = null;
     }
     return this;
@@ -59,14 +60,12 @@ class SplashStateBuilder implements Builder<SplashState, SplashStateBuilder> {
 
   @override
   void replace(SplashState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SplashState;
   }
 
   @override
-  void update(void Function(SplashStateBuilder) updates) {
+  void update(void Function(SplashStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

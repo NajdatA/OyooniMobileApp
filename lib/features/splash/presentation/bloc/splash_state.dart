@@ -11,8 +11,7 @@ part 'splash_state.g.dart';
 /// a new one each time the state has changed
 ///
 abstract class SplashState implements Built<SplashState, SplashStateBuilder> {
-  @nullable
-  String get user;
+  String? get user;
 
   SplashState._();
 

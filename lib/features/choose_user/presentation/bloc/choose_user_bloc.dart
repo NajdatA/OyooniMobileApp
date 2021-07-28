@@ -14,7 +14,7 @@ class ChooseUserBloc extends Bloc<ChooseUserEvent, ChooseUserState> {
   final ChooseUser chooseUser;
 
   ChooseUserBloc({
-    @required this.chooseUser,
+    required this.chooseUser,
   }) : super(ChooseUserState.initial());
 
   void user(String language) {

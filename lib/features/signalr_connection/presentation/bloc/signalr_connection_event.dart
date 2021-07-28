@@ -1,5 +1,3 @@
-import 'package:signalr_client/hub_connection.dart';
-
 abstract class SignalRConnectionEvent {}
 
 class SetConnectionEvent extends SignalRConnectionEvent {

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:senior_project/core/Basic/Model/ios_state_model.dart';
 import 'package:senior_project/core/data/model/base_local_data_source.dart';
 import 'package:senior_project/core/error/exceptions.dart';
 import 'package:senior_project/core/error/failures.dart';
@@ -103,7 +102,7 @@ abstract class BaseRepository {
   // Future<Either<Failure, User>> getCurrentUser();
 
   Future<Either<Failure, AppLanguage>> getAppLanguage();
-  Future<Either<Failure, bool>> getIosState();
+  // Future<Either<Failure, bool>> getIosState();
 
   ///
   ///
@@ -148,9 +147,9 @@ class BaseRepositoryImpl implements BaseRepository {
   final BaseRemoteDataSource baseRemoteDataSource;
 
   BaseRepositoryImpl(
-      {@required this.baseLocalDataSource,
-      @required this.networkInfo,
-      @required this.baseRemoteDataSource});
+      {required this.baseLocalDataSource,
+      required this.networkInfo,
+      required this.baseRemoteDataSource});
 
   @override
   Future<Either<Failure, T>> checkNetwork<T>(FutureEitherOr<T> body) async {
@@ -197,7 +196,7 @@ class BaseRepositoryImpl implements BaseRepository {
   Future<Either<Failure, T>> requestWithToken<T>(
     FutureEitherOrWithToken<T> body,
   ) async {
-    return await checkNetwork<T>(() async {
+    // return await checkNetwork<T>(() async {
       // try {
 // final t = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCIsImlhdCI6MTYyMDQzOTQ3NywiZXhwIjoxNjIwNjk4Njc3fQ.27IIl16LvRy3WX6-xEKIbeeuebfJ-4q81IBQdNiH-74';
 // return body(t);
@@ -233,7 +232,7 @@ class BaseRepositoryImpl implements BaseRepository {
       //   } else
       //     return Left(ServerFailure(ErrorCode.TIMEOUT));
       // }
-    });
+    // });
   }
 
   @override
@@ -242,8 +241,9 @@ class BaseRepositoryImpl implements BaseRepository {
   }
 
   @override
-  Future<Either<Failure, void>> logOutUser() async {
+  Future<Either<Failure, bool>> logOutUser() async {
     await baseLocalDataSource.logOutUser();
+    return Future.value(Right(true));
   }
 
   // @override
@@ -255,19 +255,19 @@ class BaseRepositoryImpl implements BaseRepository {
   //     return Left(CacheFailure());
   // }
 
-  @override
-  Future<Either<Failure, bool>> getIosState() async{
-    return await checkNetwork(
-          () async {
-        try {
-          final result = await baseRemoteDataSource.performGetRequest<IosStateModel>('param');
-          return result == null
-              ? Left(ServerFailure(ErrorCode.SERVER_ERROR))
-              : Right(result.isLive);
-        } on ServerException catch (e) {
-          return Left(ServerFailure(e.errorCode));
-        }
-      },
-    );
-  }
+  // @override
+  // Future<Either<Failure, bool>> getIosState() async{
+  //   return await checkNetwork(
+  //         () async {
+  //       try {
+  //         final result = await baseRemoteDataSource.performGetRequest<IosStateModel>('param');
+  //         return result == null
+  //             ? Left(ServerFailure(ErrorCode.SERVER_ERROR))
+  //             : Right(result.isLive);
+  //       } on ServerException catch (e) {
+  //         return Left(ServerFailure(e.errorCode));
+  //       }
+  //     },
+  //   );
+  // }
 }

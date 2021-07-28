@@ -5,8 +5,7 @@ import 'package:built_value/built_value.dart';
 part 'choose_user_state.g.dart';
 
 abstract class ChooseUserState implements Built<ChooseUserState, ChooseUserStateBuilder> {
-  @nullable
-  String get user;
+  String? get user;
 
   ChooseUserState._();
 

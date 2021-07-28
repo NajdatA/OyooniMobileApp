@@ -10,16 +10,16 @@ class _$AvailableTimesState extends AvailableTimesState {
   @override
   final bool isLoading;
   @override
-  final AvailableTimesEntity availableTimes;
+  final AvailableTimesEntity? availableTimes;
 
   factory _$AvailableTimesState(
-          [void Function(AvailableTimesStateBuilder) updates]) =>
+          [void Function(AvailableTimesStateBuilder)? updates]) =>
       (new AvailableTimesStateBuilder()..update(updates)).build();
 
-  _$AvailableTimesState._({this.isLoading, this.availableTimes}) : super._() {
-    if (isLoading == null) {
-      throw new BuiltValueNullFieldError('AvailableTimesState', 'isLoading');
-    }
+  _$AvailableTimesState._({required this.isLoading, this.availableTimes})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        isLoading, 'AvailableTimesState', 'isLoading');
   }
 
   @override
@@ -55,23 +55,24 @@ class _$AvailableTimesState extends AvailableTimesState {
 
 class AvailableTimesStateBuilder
     implements Builder<AvailableTimesState, AvailableTimesStateBuilder> {
-  _$AvailableTimesState _$v;
+  _$AvailableTimesState? _$v;
 
-  bool _isLoading;
-  bool get isLoading => _$this._isLoading;
-  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
-  AvailableTimesEntity _availableTimes;
-  AvailableTimesEntity get availableTimes => _$this._availableTimes;
-  set availableTimes(AvailableTimesEntity availableTimes) =>
+  AvailableTimesEntity? _availableTimes;
+  AvailableTimesEntity? get availableTimes => _$this._availableTimes;
+  set availableTimes(AvailableTimesEntity? availableTimes) =>
       _$this._availableTimes = availableTimes;
 
   AvailableTimesStateBuilder();
 
   AvailableTimesStateBuilder get _$this {
-    if (_$v != null) {
-      _isLoading = _$v.isLoading;
-      _availableTimes = _$v.availableTimes;
+    final $v = _$v;
+    if ($v != null) {
+      _isLoading = $v.isLoading;
+      _availableTimes = $v.availableTimes;
       _$v = null;
     }
     return this;
@@ -79,14 +80,12 @@ class AvailableTimesStateBuilder
 
   @override
   void replace(AvailableTimesState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$AvailableTimesState;
   }
 
   @override
-  void update(void Function(AvailableTimesStateBuilder) updates) {
+  void update(void Function(AvailableTimesStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -94,7 +93,9 @@ class AvailableTimesStateBuilder
   _$AvailableTimesState build() {
     final _$result = _$v ??
         new _$AvailableTimesState._(
-            isLoading: isLoading, availableTimes: availableTimes);
+            isLoading: BuiltValueNullFieldError.checkNotNull(
+                isLoading, 'AvailableTimesState', 'isLoading'),
+            availableTimes: availableTimes);
     replace(_$result);
     return _$result;
   }

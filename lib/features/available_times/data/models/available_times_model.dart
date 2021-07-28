@@ -8,20 +8,20 @@ part 'available_times_model.g.dart';
 class AvailableTimesModel extends AvailableTimesEntity {
   static final String className = 'AvailableTimesModel';
 
-  @JsonKey(name: "0", nullable: true)
-  final List<TimesModel> sun;
-  @JsonKey(name: "1", nullable: true)
-  final List<TimesModel> mon;
-  @JsonKey(name: "2", nullable: true)
-  final List<TimesModel> tues;
-  @JsonKey(name: "3", nullable: true)
-  final List<TimesModel> wed;
-  @JsonKey(name: "4", nullable: true)
-  final List<TimesModel> thurs;
-  @JsonKey(name: "5", nullable: true)
-  final List<TimesModel> fri;
-  @JsonKey(name: "6", nullable: true)
-  final List<TimesModel> sat;
+  @JsonKey(name: "0")
+  final List<TimesModel>? sun;
+  @JsonKey(name: "1")
+  final List<TimesModel>? mon;
+  @JsonKey(name: "2")
+  final List<TimesModel>? tues;
+  @JsonKey(name: "3")
+  final List<TimesModel>? wed;
+  @JsonKey(name: "4")
+  final List<TimesModel>? thurs;
+  @JsonKey(name: "5")
+  final List<TimesModel>? fri;
+  @JsonKey(name: "6")
+  final List<TimesModel>? sat;
 
   AvailableTimesModel(
       this.sun, this.mon, this.tues, this.wed, this.thurs, this.fri, this.sat)

@@ -8,9 +8,9 @@ part of home_state;
 
 class _$HomeState extends HomeState {
   @override
-  final String language;
+  final String? language;
 
-  factory _$HomeState([void Function(HomeStateBuilder) updates]) =>
+  factory _$HomeState([void Function(HomeStateBuilder)? updates]) =>
       (new HomeStateBuilder()..update(updates)).build();
 
   _$HomeState._({this.language}) : super._();
@@ -41,17 +41,18 @@ class _$HomeState extends HomeState {
 }
 
 class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
-  _$HomeState _$v;
+  _$HomeState? _$v;
 
-  String _language;
-  String get language => _$this._language;
-  set language(String language) => _$this._language = language;
+  String? _language;
+  String? get language => _$this._language;
+  set language(String? language) => _$this._language = language;
 
   HomeStateBuilder();
 
   HomeStateBuilder get _$this {
-    if (_$v != null) {
-      _language = _$v.language;
+    final $v = _$v;
+    if ($v != null) {
+      _language = $v.language;
       _$v = null;
     }
     return this;
@@ -59,14 +60,12 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
 
   @override
   void replace(HomeState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$HomeState;
   }
 
   @override
-  void update(void Function(HomeStateBuilder) updates) {
+  void update(void Function(HomeStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

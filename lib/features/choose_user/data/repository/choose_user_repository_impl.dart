@@ -13,9 +13,9 @@ class ChooseUserRepositoryImpl extends BaseRepositoryImpl
   final BaseRemoteDataSource remoteDataSource;
 
   ChooseUserRepositoryImpl({
-    @required this.chooseUserLocalDataSource,
-    @required this.remoteDataSource,
-    @required NetworkInfo networkInfo,
+    required this.chooseUserLocalDataSource,
+    required this.remoteDataSource,
+    required NetworkInfo networkInfo,
   }) : super(
           baseLocalDataSource: chooseUserLocalDataSource,
           baseRemoteDataSource: remoteDataSource,

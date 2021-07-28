@@ -14,9 +14,9 @@ class SignalRConnectionRepositoryImpl extends BaseRepositoryImpl
   final BaseRemoteDataSource remoteDataSource;
 
   SignalRConnectionRepositoryImpl({
-    @required this.localDataSource,
-    @required this.remoteDataSource,
-    @required NetworkInfo networkInfo,
+    required this.localDataSource,
+    required this.remoteDataSource,
+    required NetworkInfo networkInfo,
   }) : super(
           baseLocalDataSource: localDataSource,
           baseRemoteDataSource: remoteDataSource,

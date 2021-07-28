@@ -1,8 +1,11 @@
+import 'dart:io';
+
+import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:senior_project/core/util/app_localizations.dart';
 import 'package:senior_project/core/util/constants.dart';
 import 'package:senior_project/core/util/custom_scroll_behavior.dart';
@@ -21,6 +24,14 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   void initState() {
+    // String? path;
+    // ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DOWNLOADS)
+    //     .then((value) {
+    //   print("value is ${value}");
+    //   path = value;
+    //   final file = File('${path!}/ipaddress.txt');
+    //   file.readAsString().then((value) => print('file is $value'));
+    // });
     super.initState();
   }
 
@@ -40,8 +51,8 @@ class _AppState extends State<App> {
           locale: Locale(
               // snapshot.data == AppLanguage.AR ?
               'ar'
-                  // : 'en'
-          ),
+              // : 'en'
+              ),
           theme: Theme.of(context).copyWith(
             backgroundColor: LightThemeColors.backgroundColor,
             textSelectionColor: LightThemeColors.textColor,
@@ -56,7 +67,7 @@ class _AppState extends State<App> {
           ),
           debugShowCheckedModeBanner: false,
           builder: (context, child) {
-            ScreenUtil.init(context, designSize: Size(412, 870));
+            // ScreenUtil.init(context, designSize: Size(412, 870));
 
             return AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle.dark.copyWith(
@@ -64,7 +75,7 @@ class _AppState extends State<App> {
               ),
               child: ScrollConfiguration(
                 behavior: CustomScrollBehavior(),
-                child: child,
+                child: child!,
               ),
             );
           },

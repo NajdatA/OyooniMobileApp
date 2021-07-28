@@ -29,10 +29,10 @@ static Color getCardTitleColor(BuildContext context) =>
       Theme.of(context).primaryColor;
 
   static Color getDarkTextColor(BuildContext context) =>
-      Theme.of(context).textTheme.headline1.color;
+      Theme.of(context).textTheme.headline1!.color!;
 
   static Color getLightTextColor(BuildContext context) =>
-      Theme.of(context).textTheme.headline2.color;
+      Theme.of(context).textTheme.headline2!.color!;
 
   static Color getBottomNavigationBarIconColor(BuildContext context) =>
       Theme.of(context).hoverColor;
@@ -56,22 +56,22 @@ static Color getCardTitleColor(BuildContext context) =>
   static Color getLighterBlueColor() => Color(0xffD8F1FF);
   static Color getMoreLighterBlueColor() => Color(0xffD9F2FF);
   static Color getDarkGreyColor() => Color(0xffA8A8A8);
-  static Color getGrey300Color() => Colors.grey[300];
-  static Color getGrey600Color() => Colors.grey[600];
+  static Color? getGrey300Color() => Colors.grey[300];
+  static Color? getGrey600Color() => Colors.grey[600];
   static Color getLightGrayColor() => Color(0xffE7E7E7);
   static Color getMoreLightGrayColor() => Color(0xffd1d1d1);
-  static Color getGray400Color() => Colors.grey[400];
-  static Color getGrey400Color() => Colors.grey[400];
+  static Color? getGray400Color() => Colors.grey[400];
+  static Color? getGrey400Color() => Colors.grey[400];
   static Color getGrayColor() => Colors.grey;
   static Color getTileColor() => Color(0xff35DBA3);
-  static Color getGray600Color() => Colors.grey[600];
+  static Color? getGray600Color() => Colors.grey[600];
   static Color getRedColor() => Colors.red;
   static Color getWhiteColor() => Colors.white;
   static Color getBlackColor() => Colors.black;
   static Color getBlueColor() => Colors.blue;
   static Color getGreenColor() => Colors.green;
-  static Color getGoldColor() => Colors.yellow[800];
-  static Color getBlueColorDark() => Colors.blue[700];
+  static Color? getGoldColor() => Colors.yellow[800];
+  static Color? getBlueColorDark() => Colors.blue[700];
 
   static Color loginTextFieldColor() => Color(0xffEBEBEB);
   static Color loginHintColor() => Color(0xffA8A8A8);

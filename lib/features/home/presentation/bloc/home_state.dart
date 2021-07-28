@@ -5,8 +5,7 @@ import 'package:built_value/built_value.dart';
 part 'home_state.g.dart';
 
 abstract class HomeState implements Built<HomeState, HomeStateBuilder> {
-  @nullable
-  String get language;
+  String? get language;
 
   HomeState._();
 

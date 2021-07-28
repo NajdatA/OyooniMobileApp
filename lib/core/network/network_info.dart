@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 ///
+/// GitScrum #MW-1
 ///
 /// [NetworkInfo] interface is responsible for checking whether the device is connected to the Internet or not
 ///
@@ -11,11 +12,11 @@ abstract class NetworkInfo {
 }
 
 class NetworkInfoImpl implements NetworkInfo {
-  final DataConnectionChecker connectionChecker;
+  final InternetConnectionChecker connectionChecker;
 
   NetworkInfoImpl(
-    this.connectionChecker,
-  );
+      this.connectionChecker,
+      );
 
   @override
   Future<bool> get isConnected => connectionChecker.hasConnection;

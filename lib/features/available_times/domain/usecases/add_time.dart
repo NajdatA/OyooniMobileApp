@@ -8,13 +8,13 @@ import 'package:senior_project/features/available_times/domain/entities/times_en
 import 'package:senior_project/features/available_times/domain/repositories/available_times_repository.dart';
 import 'package:senior_project/features/login/domain/repository/login_repository.dart';
 
-class AddTime extends UseCase<List<TimesEntity>, AddTimeParams> {
+class AddTime extends UseCase<List<TimesEntity?>?, AddTimeParams> {
   final AvailableTimesRepository repository;
 
-  AddTime({@required this.repository}) : assert(repository != null);
+  AddTime({required this.repository});
 
   @override
-  Future<Either<Failure, List<TimesEntity>>> call(params) async {
+  Future<Either<Failure, List<TimesEntity?>?>> call(params) async {
     return await repository.addTime(params.index, params.from, params.to);
   }
 }

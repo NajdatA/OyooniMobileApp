@@ -16,8 +16,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final SignUp signUp;
 
   SignUpBloc({
-    @required this.signUpInputValidators,
-    @required this.signUp,
+    required this.signUpInputValidators,
+    required this.signUp,
   }) : super(SignUpState.initial());
 
   void onChangeFirstName(String first) {

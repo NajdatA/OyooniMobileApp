@@ -11,7 +11,7 @@ class ChooseUserLocalDataSourceImpl extends BaseLocalDataSourceImpl
     implements ChooseUserLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  ChooseUserLocalDataSourceImpl({@required this.sharedPreferences});
+  ChooseUserLocalDataSourceImpl({required this.sharedPreferences}) : super(sharedPreferences: sharedPreferences);
 
   @override
   Future<String> chooseUser(String user) async {

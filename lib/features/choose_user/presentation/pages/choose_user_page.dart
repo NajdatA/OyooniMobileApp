@@ -36,7 +36,7 @@ class _ChooseUserState extends State<ChooseUserPage> {
       //   backgroundColor: Color(0xFFCCCCCC),
       backgroundColor: Color(0xFF313F58),
       body: BlocBuilder(
-        cubit: bloc,
+        bloc: bloc,
         builder: (context, ChooseUserState state) {
           return Stack(
             children: [

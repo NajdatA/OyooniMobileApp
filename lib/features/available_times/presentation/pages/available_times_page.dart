@@ -7,7 +7,7 @@ import 'package:senior_project/injection.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AvailableTimesPage extends StatefulWidget {
-  const AvailableTimesPage({Key key}) : super(key: key);
+  const AvailableTimesPage({Key? key}) : super(key: key);
 
   @override
   _AvailableTimesPageState createState() => _AvailableTimesPageState();
@@ -29,7 +29,10 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
       appBar: AppBar(
         backgroundColor: Color(0xFF313F58),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20),),
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+          ),
         ),
         // backgroundColor: Colors.blue[300],
         title: Text(
@@ -76,7 +79,7 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
         ],
       ),
       body: BlocBuilder(
-          cubit: bloc,
+          bloc: bloc,
           builder: (context, AvailableTimesState state) {
             // if (state.isLoading) {
             //   return Center(
@@ -92,15 +95,16 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
                         padding: const EdgeInsets.all(12),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.blueGrey[100],
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(offset: Offset(0,02),
-                              spreadRadius: 0.4,
-                              blurRadius: 1,
-                              color: Color(0xFF313F58).withOpacity(0.3),)
-                            ]
-                          ),
+                              color: Colors.blueGrey[100],
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 02),
+                                  spreadRadius: 0.4,
+                                  blurRadius: 1,
+                                  color: Color(0xFF313F58).withOpacity(0.3),
+                                )
+                              ]),
                           child: Theme(
                             data: Theme.of(context).copyWith(
                                 accentColor: Color(0xFFF6964C),
@@ -135,112 +139,127 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
                                   } else {
                                     await showDialog(
                                         context: context,
-                                        child: AlertDialog(
-                                          backgroundColor: Colors.orange[200],
-                                          contentPadding: EdgeInsets.zero,
-                                          actions: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                                bloc.onAddTime(index, from.hour.toString()+":"+from.minute.toString(), to.hour.toString()+":"+to.minute.toString());
-                                              },
-                                              child: Container(
-                                                width: 60,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                  color: Color(0xFF145577),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 2),
-                                                child: Text(
-                                                  "نعم",
-                                                  style: TextStyle(
-                                                    color: Colors.orange[200],
-                                                    fontSize: 17,
-                                                  ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Container(
-                                                width: 60,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                  border: Border.all(
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            backgroundColor: Colors.orange[200],
+                                            contentPadding: EdgeInsets.zero,
+                                            actions: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                  bloc.onAddTime(
+                                                      index,
+                                                      from.hour.toString() +
+                                                          ":" +
+                                                          from.minute
+                                                              .toString(),
+                                                      to.hour.toString() +
+                                                          ":" +
+                                                          to.minute.toString());
+                                                },
+                                                child: Container(
+                                                  width: 60,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
                                                     color: Color(0xFF145577),
                                                   ),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 2),
-                                                child: Text(
-                                                  "لا",
-                                                  style: TextStyle(
-                                                    color: Color(0xFF145577),
-                                                    fontSize: 17,
-                                                  ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              SizedBox(height: 20),
-                                              Text(
-                                                "هل متأكد من هذه العملية؟",
-                                                style: TextStyle(
-                                                  color: Color(0xFF145577),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 20,
-                                                ),
-                                              ),
-                                              SizedBox(height: 20),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Text(
-                                                    from.format(context),
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2),
+                                                  child: Text(
+                                                    "نعم",
                                                     style: TextStyle(
-                                                      color: Color(0xFF145577),
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                      color: Colors.orange[200],
                                                       fontSize: 17,
                                                     ),
+                                                    textAlign: TextAlign.center,
                                                   ),
-                                                  Text(
-                                                    '-',
-                                                    style: TextStyle(
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Container(
+                                                  width: 60,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                    border: Border.all(
                                                       color: Color(0xFF145577),
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 30,
                                                     ),
                                                   ),
-                                                  Text(
-                                                    to.format(context),
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2),
+                                                  child: Text(
+                                                    "لا",
                                                     style: TextStyle(
                                                       color: Color(0xFF145577),
-                                                      fontWeight:
-                                                          FontWeight.w500,
                                                       fontSize: 17,
                                                     ),
+                                                    textAlign: TextAlign.center,
                                                   ),
-                                                ],
-                                              )
+                                                ),
+                                              ),
                                             ],
-                                          ),
-                                        ));
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                SizedBox(height: 20),
+                                                Text(
+                                                  "هل متأكد من هذه العملية؟",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF145577),
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 20,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 20),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Text(
+                                                      from.format(context),
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFF145577),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 17,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '-',
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFF145577),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 30,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      to.format(context),
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFF145577),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 17,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        });
                                   }
                                 },
                                 child: Icon(
@@ -249,7 +268,7 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
                                 ),
                               ),
                               title: Text(
-                                indexToDay(index),
+                                indexToDay(index)!,
                                 style: TextStyle(
                                   color: Color(0xFFF6964C),
                                 ),
@@ -264,13 +283,13 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
                                         ),
                                       )
                                     ]
-                                  : indexToTimes(index, state)
+                                  : indexToTimes(index, state)!
                                       .map((e) => Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
                                             children: [
                                               Text(
-                                                e.from,
+                                                e!.from,
                                                 style: TextStyle(
                                                   color: Color(0xFF145577),
                                                   fontSize: 15,
@@ -278,7 +297,10 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
                                               ),
                                               Text(
                                                 '-',
-                                                style: TextStyle(fontSize: 40, color: Color(0xFF145577),),
+                                                style: TextStyle(
+                                                  fontSize: 40,
+                                                  color: Color(0xFF145577),
+                                                ),
                                               ),
                                               Text(
                                                 e.to,
@@ -316,7 +338,7 @@ class _AvailableTimesPageState extends State<AvailableTimesPage> {
   }
 }
 
-String indexToDay(int index) {
+String? indexToDay(int index) {
   switch (index) {
     case 0:
       return "الأحد";
@@ -335,21 +357,21 @@ String indexToDay(int index) {
   }
 }
 
-List<TimesEntity> indexToTimes(int index, AvailableTimesState state) {
+List<TimesEntity?>? indexToTimes(int index, AvailableTimesState state) {
   switch (index) {
     case 0:
-      return state.availableTimes == null ? [] : state.availableTimes.sun;
+      return state.availableTimes == null ? [] : state.availableTimes!.sun;
     case 1:
-      return state.availableTimes == null ? [] : state.availableTimes.mon;
+      return state.availableTimes == null ? [] : state.availableTimes!.mon;
     case 2:
-      return state.availableTimes == null ? [] : state.availableTimes.tues;
+      return state.availableTimes == null ? [] : state.availableTimes!.tues;
     case 3:
-      return state.availableTimes == null ? [] : state.availableTimes.wed;
+      return state.availableTimes == null ? [] : state.availableTimes!.wed;
     case 4:
-      return state.availableTimes == null ? [] : state.availableTimes.thurs;
+      return state.availableTimes == null ? [] : state.availableTimes!.thurs;
     case 5:
-      return state.availableTimes == null ? [] : state.availableTimes.fri;
+      return state.availableTimes == null ? [] : state.availableTimes!.fri;
     case 6:
-      return state.availableTimes == null ? [] : state.availableTimes.sat;
+      return state.availableTimes == null ? [] : state.availableTimes!.sat;
   }
 }

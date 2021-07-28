@@ -15,17 +15,14 @@ abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
   // @nullable
   // User get user;
 
-  @nullable
-  ErrorCode get error;
+  ErrorCode? get error;
 
-  @nullable
-  bool get isSuccess;
+  bool? get isSuccess;
 
-  @nullable
-  bool get isEmailValid;
+  bool? get isEmailValid;
 
-  @nullable
-  bool get isPasswordValid;
+
+  bool? get isPasswordValid;
 
   bool get tokenExist;
 

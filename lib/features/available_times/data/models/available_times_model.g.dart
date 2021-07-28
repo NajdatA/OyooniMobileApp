@@ -8,34 +8,27 @@ part of 'available_times_model.dart';
 
 AvailableTimesModel _$AvailableTimesModelFromJson(Map<String, dynamic> json) {
   return AvailableTimesModel(
-    (json['0'] as List)
-        ?.map((e) =>
-            e == null ? null : TimesModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['1'] as List)
-        ?.map((e) =>
-            e == null ? null : TimesModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['2'] as List)
-        ?.map((e) =>
-            e == null ? null : TimesModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['3'] as List)
-        ?.map((e) =>
-            e == null ? null : TimesModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['4'] as List)
-        ?.map((e) =>
-            e == null ? null : TimesModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['5'] as List)
-        ?.map((e) =>
-            e == null ? null : TimesModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['6'] as List)
-        ?.map((e) =>
-            e == null ? null : TimesModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['0'] as List<dynamic>?)
+        ?.map((e) => TimesModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['1'] as List<dynamic>?)
+        ?.map((e) => TimesModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['2'] as List<dynamic>?)
+        ?.map((e) => TimesModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['3'] as List<dynamic>?)
+        ?.map((e) => TimesModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['4'] as List<dynamic>?)
+        ?.map((e) => TimesModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['5'] as List<dynamic>?)
+        ?.map((e) => TimesModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['6'] as List<dynamic>?)
+        ?.map((e) => TimesModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

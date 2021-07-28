@@ -9,7 +9,7 @@ import 'package:senior_project/features/sign_up/domain/repository/sign_up_reposi
 class SignUp extends UseCase<bool, SignUpParams> {
   final SignUpRepository repository;
 
-  SignUp({@required this.repository}) : assert(repository != null);
+  SignUp({required this.repository});
 
   @override
   Future<Either<Failure, bool>> call(params) async {
@@ -25,11 +25,11 @@ class SignUpParams extends Equatable {
   final String confirmPassword;
 
   SignUpParams({
-    this.email,
-    this.first,
-    this.last,
-    this.password,
-    this.confirmPassword,
+    required this.email,
+    required this.first,
+    required this.last,
+    required this.password,
+    required this.confirmPassword,
   });
 
   @override

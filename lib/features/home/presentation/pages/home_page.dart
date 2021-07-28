@@ -23,8 +23,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool isTalking = false;
   bool requestedToNavigate = false;
 
-  AnimationController _animationController;
-  Animation _colorTween;
+  AnimationController? _animationController;
+  Animation? _colorTween;
 
   @override
   void initState() {
@@ -39,15 +39,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
     _colorTween = ColorTween(begin: Color(0xFF145577), end: Color(0xFFFF8238))
-        .animate(_animationController);
-    _animationController.addStatusListener((animationStatus) {
+        .animate(_animationController!);
+    _animationController!.addStatusListener((animationStatus) {
       print("aaaa $animationStatus");
       switch (animationStatus) {
         case AnimationStatus.completed:
-          _animationController.reverse();
+          _animationController!.reverse();
           break;
         case AnimationStatus.dismissed:
-          _animationController.forward();
+          _animationController!.forward();
           break;
         case AnimationStatus.forward:
           break;
@@ -67,15 +67,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocListener(
-            cubit: connectionBloc,
+            bloc: connectionBloc,
             listener: (context, SignalRConnectionState state) {
               if (state.navigateToCallPage && !requestedToNavigate) {
-                connectionBloc.resetNavigateToCallPage();
-                Navigator.pushNamed(context, NameScreen.CALL_PAGE);
                 setState(() {
                   requestedToNavigate = true;
                 });
-                Future.delayed(Duration(milliseconds: 500), () {
+                connectionBloc.resetNavigateToCallPage();
+                Navigator.pushNamed(context, NameScreen.CALL_PAGE);
+                Future.delayed(Duration(milliseconds: 1000), () {
                   setState(() {
                     requestedToNavigate = false;
                   });
@@ -83,13 +83,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               }
             },
             child: BlocBuilder(
-              cubit: connectionBloc,
+              bloc: connectionBloc,
               builder: (context, SignalRConnectionState state) {
                 return BlocBuilder(
-                    cubit: bloc,
+                    bloc: bloc,
                     builder: (context, HomeState state) {
                       if (state.language != null && state.language != "") {
-                        tts.setLanguage(state.language);
+                        tts.setLanguage(state.language!);
                         // runSpeech(
                         //   [
                         //     AppLocalizations.of(context).translate("screen_size_button"),
@@ -113,23 +113,48 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           runTts();
                         },
                         onDoubleTap: () async {
+                          if (isTalking) {
+                            tts.stop();
+                            setState(() {
+                              isTalking = false;
+                            });
+                          }
                           await speech.stop();
                           await speech.initialize(
                               onStatus: (s) {
                                 print('status is $s');
-                                _animationController.forward();
+                                _animationController!.forward();
                               }, onError: (e) {
                             print('e is $e');
-                            _animationController.reset();
-                            _animationController.stop();
+                            _animationController!.reset();
+                            _animationController!.stop();
                           }).then((value) => speech.listen(
                             onResult: (r) async {
-                              _animationController.reset();
-                              _animationController.stop();
+                              _animationController!.reset();
+                              _animationController!.stop();
                               print('result is $r');
                               if (r.recognizedWords == "كاميرا") {
                                 Navigator.pushNamed(context, NameScreen.CAMERA_PAGE);
                                 await tts.speak("تم اختيار صقحة الكاميرا");
+                              }
+                              if (r.recognizedWords == "تعليمات") {
+                                setState(() {
+                                  isTalking = true;
+                                });
+                                await tts.speak("التعليمات المتاحة في صفحة الكاميرا هي");
+                                await tts.speak("ماذا أرى");
+                                await tts.speak("للاستعلام على ما يوجد أمامي");
+                                await tts.speak("النص");
+                                await tts.speak("لقراءة لافتة أو جملة ما");
+                                await tts.speak("وثيقة");
+                                await tts.speak("لقراءة وثيقة او استمارة");
+                                await tts.speak("نقود");
+                                await tts.speak("للتعرف على نوع الليرة السورية المحمولة");
+                                await tts.speak("الوان");
+                                await tts.speak("للتعرف على اللو المهيمن في الصورة");
+                                setState(() {
+                                  isTalking = false;
+                                });
                               }
                               if (r.recognizedWords == "اتصال") {
                                 connectionBloc.onRequestCall();
@@ -141,7 +166,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           ));
                         },
                         child: AnimatedBuilder(
-                          animation: _colorTween,
+                          animation: _colorTween!,
                           builder: (context, child) {
                             return Container(
                               width: double.maxFinite,
@@ -149,10 +174,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(12),
                                 gradient: LinearGradient(
                                   colors: [
-                                    _colorTween.value.withOpacity(0.1),
-                                    _colorTween.value.withOpacity(0.2),
-                                    _colorTween.value.withOpacity(0.3),
-                                    _colorTween.value.withOpacity(0.4),
+                                    _colorTween!.value.withOpacity(0.1),
+                                    _colorTween!.value.withOpacity(0.2),
+                                    _colorTween!.value.withOpacity(0.3),
+                                    _colorTween!.value.withOpacity(0.4),
                                   ],
                                   // colors: [Color(0xFF222288), Color(0xFF111166), Color(0xFF111155), Color(0xFF111144)],
 //                           colors: [Color(0xFFFFFFFF), Color(0xFFEEEEEE), Color(0xFFDDDDDD), Color(0xFFBBBBBB)],
@@ -204,7 +229,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
-                                      "\u2022 كاميرا\n\u2022 اتصال",
+                                      "\u2022 كاميرا\n\u2022 تعليمات الكاميرا\n\u2022 اتصال",
                                       style: TextStyle(
                                         color: Color(0xFFF6964C),
                                         fontSize: 20,
@@ -236,6 +261,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     await tts.speak(AppLocalizations.of(context).translate("command1_info"));
     await tts.speak(AppLocalizations.of(context).translate("command2"));
     await tts.speak(AppLocalizations.of(context).translate("command2_info"));
+    await tts.speak(AppLocalizations.of(context).translate("command3"));
+    await tts.speak(AppLocalizations.of(context).translate("command3_info"));
     setState(() {
       isTalking = false;
     });

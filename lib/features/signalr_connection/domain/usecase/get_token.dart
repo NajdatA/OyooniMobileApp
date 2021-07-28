@@ -8,7 +8,7 @@ import 'package:senior_project/features/signalr_connection/domain/repositories/s
 class GetToken extends UseCase<String, NoParams> {
   final SignalRConnectionRepository repository;
 
-  GetToken({@required this.repository}) : assert(repository != null);
+  GetToken({required this.repository});
 
   @override
   Future<Either<Failure, String>> call(params) async {

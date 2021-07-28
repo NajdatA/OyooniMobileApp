@@ -9,13 +9,13 @@ import 'package:senior_project/features/available_times/data/models/times_model.
 abstract class AvailableTimesRemoteDataSource extends BaseRemoteDataSource {
   Future<AvailableTimesModel> getAvailableTimes(String token);
   Future<String> deleteTime(String token, String id);
-  Future<List<TimesModel>> addTime(String token, int index, String from, String to);
+  Future<List<TimesModel?>?> addTime(String token, int index, String from, String to);
 }
 
 class AvailableTimesRemoteDataSourceImpl extends BaseRemoteDataSourceImpl
     implements AvailableTimesRemoteDataSource {
   AvailableTimesRemoteDataSourceImpl({
-    @required Dio dio,
+    required Dio dio,
   }) : super(
     dio: dio,
   );
@@ -28,7 +28,7 @@ class AvailableTimesRemoteDataSourceImpl extends BaseRemoteDataSourceImpl
     );
     print("response is $response");
     // print(response);
-    return response;
+    return response!;
   }
 
   @override
@@ -39,11 +39,11 @@ class AvailableTimesRemoteDataSourceImpl extends BaseRemoteDataSourceImpl
     );
     print("response is $response");
     // print(response);
-    return response.message;
+    return response!.message!;
   }
 
   @override
-  Future<List<TimesModel>> addTime(String token, int index, String from, String to) async {
+  Future<List<TimesModel?>?> addTime(String token, int index, String from, String to) async {
     final response = await performPostListRequest<TimesModel>(
       Endpoints.AVAILABLE_TIMES_URL,
       {

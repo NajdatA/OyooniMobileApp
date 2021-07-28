@@ -17,7 +17,7 @@ abstract class SignUpLocalDataSource extends BaseLocalDataSource {
 class SignUpLocalDataSourceImpl extends BaseLocalDataSourceImpl
     implements SignUpLocalDataSource {
   SignUpLocalDataSourceImpl({
-    @required SharedPreferences sharedPreferences,
+    required SharedPreferences sharedPreferences,
   }) : super(
           sharedPreferences: sharedPreferences,
         );

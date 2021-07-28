@@ -1,38 +1,30 @@
 library signalr_connection_state;
 
 import 'package:built_value/built_value.dart';
-import 'package:signalr_client/hub_connection_builder.dart';
+import 'package:signalr_netcore/hub_connection_builder.dart';
 
 part 'signalr_connection_state.g.dart';
 
 abstract class SignalRConnectionState implements Built<SignalRConnectionState, SignalRConnectionStateBuilder> {
-  @nullable
-  String get token;
+  String? get token;
 
   HubConnectionBuilder get hubConnectionBuilder;
 
-  @nullable
-  String get newVIId;
+  String? get newVIId;
 
-  @nullable
-  String get cancelledVIId;
+  String? get cancelledVIId;
 
-  @nullable
-  String get message;
+  String? get message;
 
-  @nullable
-  String get visuallyImpairedDisconnectionMessage;
+  String? get visuallyImpairedDisconnectionMessage;
 
   bool get navigateToCallPage;
 
-  @nullable
-  bool get isCallAccepted;
+  bool? get isCallAccepted;
 
-  @nullable
-  String get candidateData;
+  String? get candidateData;
 
-  @nullable
-  String get sdpData;
+  String? get sdpData;
 
   // @nullable
   // String get visuallyImpairedConnectionId;

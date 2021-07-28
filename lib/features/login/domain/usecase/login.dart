@@ -9,7 +9,7 @@ import 'package:senior_project/features/login/domain/repository/login_repository
 class Login extends UseCase<TokensEntity, LoginParams> {
   final LoginRepository repository;
 
-  Login({@required this.repository}) : assert(repository != null);
+  Login({required this.repository});
 
   @override
   Future<Either<Failure, TokensEntity>> call(params) async {
@@ -22,8 +22,8 @@ class LoginParams extends Equatable {
   final String password;
 
   LoginParams({
-    this.email,
-    this.password,
+    required this.email,
+    required this.password,
   });
 
   @override

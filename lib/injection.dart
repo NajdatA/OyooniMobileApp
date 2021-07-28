@@ -1,6 +1,6 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:senior_project/features/available_times/data/datasources/available_times_remote_data_source.dart';
 import 'package:senior_project/features/available_times/data/repositories/available_times_repository_impl.dart';
 import 'package:senior_project/features/available_times/domain/repositories/available_times_repository.dart';
@@ -8,6 +8,11 @@ import 'package:senior_project/features/available_times/domain/usecases/add_time
 import 'package:senior_project/features/available_times/domain/usecases/delete_time.dart';
 import 'package:senior_project/features/available_times/domain/usecases/get_available_times.dart';
 import 'package:senior_project/features/available_times/presentation/bloc/available_times_bloc.dart';
+import 'package:senior_project/features/camera/data/datasources/camera_remote_data_source.dart';
+import 'package:senior_project/features/camera/domain/usecases/banknote_recognition.dart';
+import 'package:senior_project/features/camera/domain/usecases/image_captioning.dart';
+import 'package:senior_project/features/camera/domain/usecases/text_recognition.dart';
+import 'package:senior_project/features/camera/presentation/bloc/camera_bloc.dart';
 import 'package:senior_project/features/login/data/datasource/login_local_data_source.dart';
 import 'package:senior_project/features/login/data/repository/login_repository_impl.dart';
 import 'package:senior_project/features/login/domain/usecase/check_token.dart';
@@ -31,6 +36,9 @@ import 'core/data/model/base_remote_datasource.dart';
 import 'core/data/repository/base_repository.dart';
 import 'core/network/network_info.dart';
 import 'core/util/constants.dart';
+import 'features/camera/data/repositories/camera_repository_impl.dart';
+import 'features/camera/domain/repositories/camera_repository.dart';
+import 'features/camera/domain/usecases/color_recognition.dart';
 import 'features/choose_user/data/data_source/choose_user_local_data_source.dart';
 import 'features/choose_user/data/repository/choose_user_repository_impl.dart';
 import 'features/choose_user/domain/repository/choose_user_repository.dart';
@@ -64,7 +72,7 @@ Future<void> init() async {
     () {
       final dio = Dio(
         BaseOptions(
-          connectTimeout: 20000,
+          connectTimeout: 500000,
           baseUrl: Endpoints.BASE_URL,
           headers: {
             'Accept': 'application/json',
@@ -86,7 +94,7 @@ Future<void> init() async {
   );
 
   /// Adding the [DataConnectionChecker] instance to the graph to be later used by the [NetworkInfoImpl]
-  sl.registerLazySingleton(() => DataConnectionChecker());
+  sl.registerLazySingleton(() => InternetConnectionChecker());
 
   //! Core
   ///Creating [NetworkInfoImpl] class
@@ -126,6 +134,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<AvailableTimesRemoteDataSource>(
         () => AvailableTimesRemoteDataSourceImpl(dio: sl()),
+  );
+  sl.registerLazySingleton<CameraRemoteDataSource>(
+        () => CameraRemoteDataSourceImpl(dio: sl()),
   );
 
   // Repository
@@ -167,6 +178,11 @@ Future<void> init() async {
       localDataSource: sl(),
       remoteDataSource: sl()));
 
+  sl.registerLazySingleton<CameraRepository>(() => CameraRepositoryImpl(
+      networkInfo: sl(),
+      baseLocalDataSource: sl(),
+      cameraRemoteDataSource: sl()));
+
   // ! Use cases
   // Adding the use cases to the injection graph
   sl.registerLazySingleton(() => GetUser(repository: sl()));
@@ -180,6 +196,10 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetToken(repository: sl()));
   sl.registerLazySingleton(() => DeleteTime(repository: sl()));
   sl.registerLazySingleton(() => AddTime(repository: sl()));
+  sl.registerLazySingleton(() => ImageCaptioning(repository: sl()));
+  sl.registerLazySingleton(() => TextRecognition(repository: sl()));
+  sl.registerLazySingleton(() => BanknoteRecognition(repository: sl()));
+  sl.registerLazySingleton(() => ColorRecognition(repository: sl()));
 
   //! Features
   // Bloc
@@ -201,4 +221,12 @@ Future<void> init() async {
 
   sl.registerLazySingleton(
           () => SignalRConnectionBloc(sl()));
+
+  sl.registerLazySingleton(
+          () => CameraBloc(
+            sl(),
+            sl(),
+            sl(),
+            sl(),
+          ));
 }

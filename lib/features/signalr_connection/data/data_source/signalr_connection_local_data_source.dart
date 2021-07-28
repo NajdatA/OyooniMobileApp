@@ -11,7 +11,7 @@ class SignalRConnectionLocalDataSourceImpl extends BaseLocalDataSourceImpl
     implements SignalRConnectionLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  SignalRConnectionLocalDataSourceImpl({@required this.sharedPreferences});
+  SignalRConnectionLocalDataSourceImpl({required this.sharedPreferences}) : super(sharedPreferences: sharedPreferences);
 
   @override
   Future<String> get getToken => Future.value(

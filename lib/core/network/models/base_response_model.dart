@@ -2,6 +2,9 @@ library base_response_model;
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:senior_project/features/available_times/data/models/available_times_model.dart';
+import 'package:senior_project/features/camera/data/models/captioned_image_model.dart';
+import 'package:senior_project/features/camera/data/models/recognized_banknote_model.dart';
+import 'package:senior_project/features/camera/data/models/recognized_color_model.dart';
 import 'package:senior_project/features/login/data/model/tokens_model.dart';
 import 'package:senior_project/features/sign_up/data/model/tokens_model.dart';
 
@@ -19,15 +22,14 @@ class BaseResponseModel<T> {
   @JsonKey(
     fromJson: _dataFromJson,
     toJson: _dataToJson,
-    nullable: true,
   )
-  final T data;
+  final T? data;
 
   @JsonKey(name: 'message')
-  final String message;
+  final String? message;
 
-  @JsonKey(nullable: true)
-  final String errors;
+  @JsonKey()
+  final String? errors;
 
   BaseResponseModel({
     this.data,
@@ -39,7 +41,7 @@ class BaseResponseModel<T> {
       _$BaseResponseModelFromJson<T>(json);
 }
 
-T _dataFromJson<T>(dynamic data) {
+T? _dataFromJson<T>(dynamic data) {
   print('T is ${T.toString()} $data');
   if (data is Map<String, dynamic>) {
     if (T.toString() == 'Null') return null;
@@ -53,9 +55,15 @@ T _dataFromJson<T>(dynamic data) {
       return TokensModel.fromJson(data) as T;
     } else if (T.toString() == AvailableTimesModel.className) {
       return AvailableTimesModel.fromJson(data) as T;
+    } else if (T.toString() == CaptionedImageModel.className) {
+      return CaptionedImageModel.fromJson(data) as T;
+    } else if (T.toString() == RecognizedBanknoteModel.className) {
+      return RecognizedBanknoteModel.fromJson(data) as T;
+    } else if (T.toString() == RecognizedColorModel.className) {
+      return RecognizedColorModel.fromJson(data) as T;
     }
   }
 }
 
-Map<String, dynamic> _dataToJson<T, S, U>(T input, [S other1, U other2]) =>
+Map<String, dynamic>? _dataToJson<T, S, U>(T input, [S? other1, U? other2]) =>
     {'data': input};

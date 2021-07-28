@@ -14,7 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   // final GetLanguage getLanguage;
   //
   HomeBloc(
-  //   @required this.getLanguage,
+  //   required this.getLanguage,
   ) : super(HomeState.initial());
   //
   // void onScreenAppeared() {

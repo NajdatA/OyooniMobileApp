@@ -11,7 +11,7 @@ import 'package:senior_project/injection.dart';
 class VideoCallPage extends StatefulWidget {
   final String id;
 
-  const VideoCallPage({Key key, this.id}) : super(key: key);
+  const VideoCallPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _VideoCallPageState createState() => _VideoCallPageState();
@@ -21,8 +21,8 @@ class _VideoCallPageState extends State<VideoCallPage> {
   final bloc = sl<SignalRConnectionBloc>();
 
   // bool _offer = false;
-  RTCPeerConnection _peerConnection;
-  MediaStream _localStream;
+  RTCPeerConnection? _peerConnection;
+  MediaStream? _localStream;
   RTCVideoRenderer _localRenderer = new RTCVideoRenderer();
   RTCVideoRenderer _remoteRenderer = new RTCVideoRenderer();
 
@@ -47,10 +47,10 @@ class _VideoCallPageState extends State<VideoCallPage> {
 
   @override
   void dispose() {
-    _localStream.dispose();
+    _localStream!.dispose();
     _localRenderer.dispose();
     _remoteRenderer.dispose();
-    _peerConnection.dispose();
+    _peerConnection!.dispose();
     super.dispose();
   }
 
@@ -61,16 +61,16 @@ class _VideoCallPageState extends State<VideoCallPage> {
         listener: (context, SignalRConnectionState state) {
           if (state.sdpData != null) {
             print("SDDPPPP");
-            _setRemoteDescription(state.sdpData);
+            _setRemoteDescription(state.sdpData!);
             bloc.resetSdpData();
           }
           if (state.candidateData != null) {
             print("CANDIDATTTEEEE");
-            _addCandidate(state.candidateData);
+            _addCandidate(state.candidateData!);
             bloc.resetCandidateData();
           }
         },
-        cubit: bloc,
+        bloc: bloc,
         child: Column(
           children: [
             Expanded(child: RTCVideoView(_remoteRenderer, objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,)),
@@ -100,7 +100,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
   _createPeerConnection() async {
     Map<String, dynamic> configuration = {
       "iceServers": [
-        {"url": "stun:stun1.l.google.com:19302"},
+        {"url": "stun:stun1.l.google.com:19302",},
       ]
     };
 
@@ -110,7 +110,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
         "OfferToReceiveVideo": true,
       },
       "optional": [],
-      // 'sdpSemantics': 'uinified-plan'
+      'sdpSemantics': 'plan-b'
     };
 
     _localStream = await _getUserMedia();
@@ -118,7 +118,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
     RTCPeerConnection pc =
         await createPeerConnection(configuration, offerSdpConstraints);
 
-    pc.addStream(_localStream);
+    pc.addStream(_localStream!);
 
     print("pcccc is $pc");
     pc.onIceCandidate = (e) {
@@ -152,7 +152,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
     print(session['candidate']);
     dynamic candidate = new RTCIceCandidate(
         session['candidate'], session['sdpMid'], session['sdpMlineIndex']);
-    await _peerConnection.addCandidate(candidate);
+    await _peerConnection!.addCandidate(candidate);
     setState(() {});
   }
 
@@ -175,7 +175,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
   void _createOffer() async {
     print("create offer");
     RTCSessionDescription description =
-        await _peerConnection.createOffer({'offerToReceiveVideo': 1});
+        await _peerConnection!.createOffer({'offerToReceiveVideo': 1});
     var s = parse(description.sdp.toString());
     print("session is " + json.encode(s));
     // _offer = true;
@@ -185,7 +185,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
     //       'type': description.type.toString(),
     //     }));
 
-    _peerConnection.setLocalDescription(description);
+    _peerConnection!.setLocalDescription(description);
     // session = json.encode(s);
     bloc.onSendSignal(json.encode(s));
   }
@@ -203,7 +203,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
         'answer');
     print(description.toMap());
 
-    await _peerConnection.setRemoteDescription(description);
+    await _peerConnection!.setRemoteDescription(description);
     setState(() {});
   }
 }

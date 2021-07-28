@@ -15,7 +15,7 @@ abstract class SignUpRemoteDataSource extends BaseRemoteDataSource {
 class SignUpRemoteDataSourceImpl extends BaseRemoteDataSourceImpl
     implements SignUpRemoteDataSource {
   SignUpRemoteDataSourceImpl({
-    @required Dio dio,
+    required Dio dio,
   }) : super(
           dio: dio,
         );

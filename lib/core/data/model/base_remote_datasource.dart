@@ -4,7 +4,6 @@ import 'dart:ffi';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:senior_project/core/Basic/Entity/paginated_data.dart';
 import 'package:senior_project/core/error/error_handler.dart';
 import 'package:senior_project/core/error/exceptions.dart';
 import 'package:senior_project/core/network/models/base_list_response_model.dart';
@@ -57,14 +56,14 @@ abstract class BaseRemoteDataSource {
   ///   b- If the [ErrorHandler.handleRemoteError] throws an error
   ///
   @protected
-  Future<BaseResponseModel<T>> performPatchRequest<T>(
+  Future<BaseResponseModel<T?>?> performPatchRequest<T>(
     String endpoint,
     Map<String, dynamic> data, {
     String token = '',
   });
 
   @protected
-  Future<BaseResponseModel<T>> performFormPatchRequest<T>(
+  Future<BaseResponseModel<T?>?> performFormPatchRequest<T>(
     String endpoint,
     FormData data, {
     String token = '',
@@ -92,7 +91,7 @@ abstract class BaseRemoteDataSource {
   });
 
   @protected
-  Future<List<T>> performPostListRequest<T>(
+  Future<List<T?>?> performPostListRequest<T>(
     String endpoint,
     Map<String, dynamic> data, {
     String token = '',
@@ -112,12 +111,12 @@ abstract class BaseRemoteDataSource {
   ///   a- With [ErrorCode.TIMEOUT] if the request has timed out
   ///   b- If the [ErrorHandler.handleRemoteError] throws an error
   ///
-  @protected
-  Future<PaginatedData<T>> performGetPaginatedListRequest<T>(
-    String endpoint, {
-    Map<String, dynamic> params,
-    String token = '',
-  });
+  // @protected
+  // Future<PaginatedData<T>> performGetPaginatedListRequest<T>(
+  //   String endpoint, {
+  //   Map<String, dynamic> params,
+  //   String token = '',
+  // });
 
   ///
   /// This function performs a GET http request to the specified [endpoint]
@@ -134,7 +133,7 @@ abstract class BaseRemoteDataSource {
   ///   b- If the [ErrorHandler.handleRemoteError] throws an error
   ///
   @protected
-  Future<List<T>> performGetListRequest<T>(
+  Future<List<T?>?> performGetListRequest<T>(
     String endpoint, {
     Map<String, dynamic> params,
     String token = '',
@@ -155,7 +154,7 @@ abstract class BaseRemoteDataSource {
   ///   b- If the [ErrorHandler.handleRemoteError] throws an error
   ///
   @protected
-  Future<T> performGetRequest<T>(
+  Future<T?> performGetRequest<T>(
     String endpoint, {
     Map<String, dynamic> params,
     String token = '',
@@ -170,15 +169,15 @@ abstract class BaseRemoteDataSource {
 class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   final Dio dio;
 
-  BaseRemoteDataSourceImpl({@required this.dio});
+  BaseRemoteDataSourceImpl({required this.dio});
 
   @override
-  Future<T> performGetRequest<T>(
+  Future<T?> performGetRequest<T>(
     String endpoint, {
-    Map<String, dynamic> params,
+    Map<String, dynamic>? params,
     String token = '',
     bool withBaseResponse = true,
-    Mapper<T> mapper,
+    Mapper<T>? mapper,
   }) async {
     try {
       print('>>>>>>>>>>. the url  ---> $endpoint');
@@ -210,14 +209,14 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
         throw ServerException(ErrorCode.SERVER_ERROR);
     } on DioError catch (e) {
       print("haha error is $e");
-      ErrorHandler.handleRemoteError(e.response);
+      ErrorHandler.handleRemoteError(e.response!);
     }
   }
 
   @override
-  Future<List<T>> performGetListRequest<T>(
+  Future<List<T?>?> performGetListRequest<T>(
     String endpoint, {
-    Map<String, dynamic> params,
+    Map<String, dynamic>? params,
     String token = '',
   }) async {
     try {
@@ -237,12 +236,12 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
       } else
         throw ServerException(ErrorCode.SERVER_ERROR);
     } on DioError catch (e) {
-      ErrorHandler.handleRemoteError(e.response);
+      ErrorHandler.handleRemoteError(e.response!);
     }
   }
 
   @override
-  Future<List<T>> performPostListRequest<T>(
+  Future<List<T?>?> performPostListRequest<T>(
     String endpoint,
     Map<String, dynamic> data, {
     String token = '',
@@ -264,36 +263,8 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
       } else
         throw ServerException(ErrorCode.SERVER_ERROR);
     } on DioError catch (e) {
-      ErrorHandler.handleRemoteError(e.response);
+      ErrorHandler.handleRemoteError(e.response!);
     }
-  }
-
-  @override
-  Future<PaginatedData<T>> performGetPaginatedListRequest<T>(
-    String endpoint, {
-    Map<String, dynamic> params,
-    String token = '',
-  }) async {
-    // try {
-    final response = await dio.get(
-      endpoint,
-      options: GetOptions.getOptionsWithToken(token),
-      queryParameters: params,
-    );
-
-    if (ErrorHandler.handleRemoteError(response)) {
-      final baseResponse =
-          BaseListResponseModel<T>.fromJson(json.decode(response.data));
-      if (baseResponse != null && baseResponse.data != null)
-        return PaginatedData(baseResponse.total, baseResponse.data);
-      else
-        throw ServerException(ErrorCode.SERVER_ERROR);
-    } else
-      throw ServerException(ErrorCode.SERVER_ERROR);
-    // } on DioError catch (e) {
-    // ErrorHandler.handleRemoteError(e.response);
-    //
-    // }
   }
 
   @override
@@ -334,11 +305,11 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   }
 
   @override
-  Future<BaseResponseModel<T>> performDeleteRequest<T>(
+  Future<BaseResponseModel<T?>?> performDeleteRequest<T>(
     String endpoint, {
-    Map<String, dynamic> data,
+    Map<String, dynamic>? data,
     bool withBaseResponse = true,
-    Mapper<T> mapper,
+    Mapper<T>? mapper,
     String token = '',
   }) async {
     try {
@@ -400,9 +371,9 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
   }
 
   @override
-  Future<BaseResponseModel<T>> performPatchRequest<T>(
+  Future<BaseResponseModel<T?>?> performPatchRequest<T>(
       String endpoint, dynamic data,
-      {String token = '', String contentType}) async {
+      {String token = '', String? contentType}) async {
     try {
       print('qqqqq');
       String d = '33';
@@ -426,12 +397,12 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
       } else
         throw ServerException(ErrorCode.SERVER_ERROR);
     } on DioError catch (e) {
-      ErrorHandler.handleRemoteError(e.response);
+      ErrorHandler.handleRemoteError(e.response!);
     }
   }
 
   @override
-  Future<BaseResponseModel<T>> performFormPatchRequest<T>(
+  Future<BaseResponseModel<T?>?> performFormPatchRequest<T>(
     String endpoint,
     FormData data, {
     String token = '',
@@ -455,7 +426,7 @@ class BaseRemoteDataSourceImpl extends BaseRemoteDataSource {
       } else
         throw ServerException(ErrorCode.SERVER_ERROR);
     } on DioError catch (e) {
-      ErrorHandler.handleRemoteError(e.response);
+      ErrorHandler.handleRemoteError(e.response!);
     }
   }
 }

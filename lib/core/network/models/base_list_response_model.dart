@@ -16,18 +16,14 @@ part 'base_list_response_model.g.dart';
 class BaseListResponseModel<T> {
   @JsonKey(name: 'data')
   @_Converter()
-  final List<T> data;
+  final List<T>? data;
 
-  @JsonKey(name: 'msg', nullable: true)
-  final String message;
-
-  @JsonKey(name: 'total', nullable: true)
-  final int total;
+  @JsonKey(name: 'msg')
+  final String? message;
 
   BaseListResponseModel({
     this.data,
     this.message,
-    this.total,
   });
 
   factory BaseListResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -49,12 +45,12 @@ class _Converter<T> implements JsonConverter<T, Object> {
       return json as T;
     } catch (e) {
       print('--- _Converter.fromJson => ERROR: $e');
-      return null;
+      throw e;
     }
   }
 
   @override
   Object toJson(T object) {
-    return object;
+    return object as Object;
   }
 }

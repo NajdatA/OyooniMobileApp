@@ -8,50 +8,46 @@ part of signalr_connection_state;
 
 class _$SignalRConnectionState extends SignalRConnectionState {
   @override
-  final String token;
+  final String? token;
   @override
   final HubConnectionBuilder hubConnectionBuilder;
   @override
-  final String newVIId;
+  final String? newVIId;
   @override
-  final String cancelledVIId;
+  final String? cancelledVIId;
   @override
-  final String message;
+  final String? message;
   @override
-  final String visuallyImpairedDisconnectionMessage;
+  final String? visuallyImpairedDisconnectionMessage;
   @override
   final bool navigateToCallPage;
   @override
-  final bool isCallAccepted;
+  final bool? isCallAccepted;
   @override
-  final String candidateData;
+  final String? candidateData;
   @override
-  final String sdpData;
+  final String? sdpData;
 
   factory _$SignalRConnectionState(
-          [void Function(SignalRConnectionStateBuilder) updates]) =>
+          [void Function(SignalRConnectionStateBuilder)? updates]) =>
       (new SignalRConnectionStateBuilder()..update(updates)).build();
 
   _$SignalRConnectionState._(
       {this.token,
-      this.hubConnectionBuilder,
+      required this.hubConnectionBuilder,
       this.newVIId,
       this.cancelledVIId,
       this.message,
       this.visuallyImpairedDisconnectionMessage,
-      this.navigateToCallPage,
+      required this.navigateToCallPage,
       this.isCallAccepted,
       this.candidateData,
       this.sdpData})
       : super._() {
-    if (hubConnectionBuilder == null) {
-      throw new BuiltValueNullFieldError(
-          'SignalRConnectionState', 'hubConnectionBuilder');
-    }
-    if (navigateToCallPage == null) {
-      throw new BuiltValueNullFieldError(
-          'SignalRConnectionState', 'navigateToCallPage');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        hubConnectionBuilder, 'SignalRConnectionState', 'hubConnectionBuilder');
+    BuiltValueNullFieldError.checkNotNull(
+        navigateToCallPage, 'SignalRConnectionState', 'navigateToCallPage');
   }
 
   @override
@@ -122,72 +118,74 @@ class _$SignalRConnectionState extends SignalRConnectionState {
 
 class SignalRConnectionStateBuilder
     implements Builder<SignalRConnectionState, SignalRConnectionStateBuilder> {
-  _$SignalRConnectionState _$v;
+  _$SignalRConnectionState? _$v;
 
-  String _token;
-  String get token => _$this._token;
-  set token(String token) => _$this._token = token;
+  String? _token;
+  String? get token => _$this._token;
+  set token(String? token) => _$this._token = token;
 
-  HubConnectionBuilder _hubConnectionBuilder;
-  HubConnectionBuilder get hubConnectionBuilder => _$this._hubConnectionBuilder;
-  set hubConnectionBuilder(HubConnectionBuilder hubConnectionBuilder) =>
+  HubConnectionBuilder? _hubConnectionBuilder;
+  HubConnectionBuilder? get hubConnectionBuilder =>
+      _$this._hubConnectionBuilder;
+  set hubConnectionBuilder(HubConnectionBuilder? hubConnectionBuilder) =>
       _$this._hubConnectionBuilder = hubConnectionBuilder;
 
-  String _newVIId;
-  String get newVIId => _$this._newVIId;
-  set newVIId(String newVIId) => _$this._newVIId = newVIId;
+  String? _newVIId;
+  String? get newVIId => _$this._newVIId;
+  set newVIId(String? newVIId) => _$this._newVIId = newVIId;
 
-  String _cancelledVIId;
-  String get cancelledVIId => _$this._cancelledVIId;
-  set cancelledVIId(String cancelledVIId) =>
+  String? _cancelledVIId;
+  String? get cancelledVIId => _$this._cancelledVIId;
+  set cancelledVIId(String? cancelledVIId) =>
       _$this._cancelledVIId = cancelledVIId;
 
-  String _message;
-  String get message => _$this._message;
-  set message(String message) => _$this._message = message;
+  String? _message;
+  String? get message => _$this._message;
+  set message(String? message) => _$this._message = message;
 
-  String _visuallyImpairedDisconnectionMessage;
-  String get visuallyImpairedDisconnectionMessage =>
+  String? _visuallyImpairedDisconnectionMessage;
+  String? get visuallyImpairedDisconnectionMessage =>
       _$this._visuallyImpairedDisconnectionMessage;
   set visuallyImpairedDisconnectionMessage(
-          String visuallyImpairedDisconnectionMessage) =>
+          String? visuallyImpairedDisconnectionMessage) =>
       _$this._visuallyImpairedDisconnectionMessage =
           visuallyImpairedDisconnectionMessage;
 
-  bool _navigateToCallPage;
-  bool get navigateToCallPage => _$this._navigateToCallPage;
-  set navigateToCallPage(bool navigateToCallPage) =>
+  bool? _navigateToCallPage;
+  bool? get navigateToCallPage => _$this._navigateToCallPage;
+  set navigateToCallPage(bool? navigateToCallPage) =>
       _$this._navigateToCallPage = navigateToCallPage;
 
-  bool _isCallAccepted;
-  bool get isCallAccepted => _$this._isCallAccepted;
-  set isCallAccepted(bool isCallAccepted) =>
+  bool? _isCallAccepted;
+  bool? get isCallAccepted => _$this._isCallAccepted;
+  set isCallAccepted(bool? isCallAccepted) =>
       _$this._isCallAccepted = isCallAccepted;
 
-  String _candidateData;
-  String get candidateData => _$this._candidateData;
-  set candidateData(String candidateData) =>
+  String? _candidateData;
+  String? get candidateData => _$this._candidateData;
+  set candidateData(String? candidateData) =>
       _$this._candidateData = candidateData;
 
-  String _sdpData;
-  String get sdpData => _$this._sdpData;
-  set sdpData(String sdpData) => _$this._sdpData = sdpData;
+  String? _sdpData;
+  String? get sdpData => _$this._sdpData;
+  set sdpData(String? sdpData) => _$this._sdpData = sdpData;
 
   SignalRConnectionStateBuilder();
 
   SignalRConnectionStateBuilder get _$this {
-    if (_$v != null) {
-      _token = _$v.token;
-      _hubConnectionBuilder = _$v.hubConnectionBuilder;
-      _newVIId = _$v.newVIId;
-      _cancelledVIId = _$v.cancelledVIId;
-      _message = _$v.message;
+    final $v = _$v;
+    if ($v != null) {
+      _token = $v.token;
+      _hubConnectionBuilder = $v.hubConnectionBuilder;
+      _newVIId = $v.newVIId;
+      _cancelledVIId = $v.cancelledVIId;
+      _message = $v.message;
       _visuallyImpairedDisconnectionMessage =
-          _$v.visuallyImpairedDisconnectionMessage;
-      _navigateToCallPage = _$v.navigateToCallPage;
-      _isCallAccepted = _$v.isCallAccepted;
-      _candidateData = _$v.candidateData;
-      _sdpData = _$v.sdpData;
+          $v.visuallyImpairedDisconnectionMessage;
+      _navigateToCallPage = $v.navigateToCallPage;
+      _isCallAccepted = $v.isCallAccepted;
+      _candidateData = $v.candidateData;
+      _sdpData = $v.sdpData;
       _$v = null;
     }
     return this;
@@ -195,14 +193,12 @@ class SignalRConnectionStateBuilder
 
   @override
   void replace(SignalRConnectionState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SignalRConnectionState;
   }
 
   @override
-  void update(void Function(SignalRConnectionStateBuilder) updates) {
+  void update(void Function(SignalRConnectionStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -211,13 +207,19 @@ class SignalRConnectionStateBuilder
     final _$result = _$v ??
         new _$SignalRConnectionState._(
             token: token,
-            hubConnectionBuilder: hubConnectionBuilder,
+            hubConnectionBuilder: BuiltValueNullFieldError.checkNotNull(
+                hubConnectionBuilder,
+                'SignalRConnectionState',
+                'hubConnectionBuilder'),
             newVIId: newVIId,
             cancelledVIId: cancelledVIId,
             message: message,
             visuallyImpairedDisconnectionMessage:
                 visuallyImpairedDisconnectionMessage,
-            navigateToCallPage: navigateToCallPage,
+            navigateToCallPage: BuiltValueNullFieldError.checkNotNull(
+                navigateToCallPage,
+                'SignalRConnectionState',
+                'navigateToCallPage'),
             isCallAccepted: isCallAccepted,
             candidateData: candidateData,
             sdpData: sdpData);

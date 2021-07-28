@@ -8,7 +8,7 @@ import 'package:senior_project/features/choose_user/domain/repository/choose_use
 class ChooseUser extends UseCase<String, ChooseUserParams> {
   final ChooseUserRepository repository;
 
-  ChooseUser({@required this.repository}) : assert(repository != null);
+  ChooseUser({required this.repository});
 
   @override
   Future<Either<Failure, String>> call(params) async {

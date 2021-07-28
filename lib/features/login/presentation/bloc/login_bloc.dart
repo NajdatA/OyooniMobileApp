@@ -26,9 +26,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final CheckToken token;
 
   LoginBloc({
-    @required this.loginInputValidators,
-    @required this.login,
-    @required this.token,
+    required this.loginInputValidators,
+    required this.login,
+    required this.token,
   }) : super(LoginState.initial());
 
   void onChangeEmail(String email) {

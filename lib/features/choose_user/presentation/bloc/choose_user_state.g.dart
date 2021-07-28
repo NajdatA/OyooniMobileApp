@@ -8,9 +8,9 @@ part of choose_user_state;
 
 class _$ChooseUserState extends ChooseUserState {
   @override
-  final String user;
+  final String? user;
 
-  factory _$ChooseUserState([void Function(ChooseUserStateBuilder) updates]) =>
+  factory _$ChooseUserState([void Function(ChooseUserStateBuilder)? updates]) =>
       (new ChooseUserStateBuilder()..update(updates)).build();
 
   _$ChooseUserState._({this.user}) : super._();
@@ -43,17 +43,18 @@ class _$ChooseUserState extends ChooseUserState {
 
 class ChooseUserStateBuilder
     implements Builder<ChooseUserState, ChooseUserStateBuilder> {
-  _$ChooseUserState _$v;
+  _$ChooseUserState? _$v;
 
-  String _user;
-  String get user => _$this._user;
-  set user(String user) => _$this._user = user;
+  String? _user;
+  String? get user => _$this._user;
+  set user(String? user) => _$this._user = user;
 
   ChooseUserStateBuilder();
 
   ChooseUserStateBuilder get _$this {
-    if (_$v != null) {
-      _user = _$v.user;
+    final $v = _$v;
+    if ($v != null) {
+      _user = $v.user;
       _$v = null;
     }
     return this;
@@ -61,14 +62,12 @@ class ChooseUserStateBuilder
 
   @override
   void replace(ChooseUserState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ChooseUserState;
   }
 
   @override
-  void update(void Function(ChooseUserStateBuilder) updates) {
+  void update(void Function(ChooseUserStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

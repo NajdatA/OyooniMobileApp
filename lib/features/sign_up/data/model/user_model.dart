@@ -16,24 +16,24 @@ class UserModel extends User {
   final String profilePicture;
 
   UserModel({
-    @required this.id,
-    @required this.username,
-    @required this.phoneNumber='',
-    @required this.profilePicture,
-    @required this.email,
-  });
+    required this.id,
+    required this.username,
+    required this.phoneNumber,
+    required this.profilePicture,
+    required this.email,
+  }) : super(
+            id: id,
+            username: username,
+            phoneNumber: phoneNumber,
+            profileImage: profilePicture,
+            email: email);
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return _$UserModelFromJson(json);
   }
-  Map<String,dynamic> toJson() => _$UserModelToJson(this);
+
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   @override
-  List<Object> get props => [
-        id,
-        email,
-        phoneNumber,
-        username,
-    profilePicture
-      ];
+  List<Object> get props => [id, email, phoneNumber, username, profilePicture];
 }

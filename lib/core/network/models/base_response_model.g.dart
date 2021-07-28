@@ -9,8 +9,8 @@ part of base_response_model;
 BaseResponseModel<T> _$BaseResponseModelFromJson<T>(Map<String, dynamic> json) {
   return BaseResponseModel<T>(
     data: _dataFromJson(json['data']),
-    message: json['message'] as String,
-    errors: json['errors'] as String,
+    message: json['message'] as String?,
+    errors: json['errors'] as String?,
   );
 }
 

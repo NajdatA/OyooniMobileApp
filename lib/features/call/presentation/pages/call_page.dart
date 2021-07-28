@@ -16,12 +16,12 @@ class CallPage extends StatefulWidget {
 }
 
 class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
-  AnimationController rotationController;
+  AnimationController? rotationController;
   final connectionBloc = sl<SignalRConnectionBloc>();
   FlutterTts tts = FlutterTts();
   bool isAnswered = false;
-  RTCPeerConnection _peerConnection;
-  MediaStream _localStream;
+  RTCPeerConnection? _peerConnection;
+  MediaStream? _localStream;
   RTCVideoRenderer _remoteRenderer = new RTCVideoRenderer();
   bool firstCandidateFetched = false;
 
@@ -34,13 +34,13 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
     rotationController = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
     tts.awaitSpeakCompletion(true);
-    rotationController.addStatusListener((animationStatus) {
+    rotationController!.addStatusListener((animationStatus) {
       switch (animationStatus) {
         case AnimationStatus.completed:
-          rotationController.reverse();
+          rotationController!.reverse();
           break;
         case AnimationStatus.dismissed:
-          rotationController.forward();
+          rotationController!.forward();
           break;
         case AnimationStatus.forward:
           break;
@@ -48,7 +48,7 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
           break;
       }
     });
-    rotationController.forward();
+    rotationController!.forward();
     super.initState();
   }
 
@@ -58,10 +58,10 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _localStream.dispose();
+    _localStream!.dispose();
     _remoteRenderer.dispose();
-    _peerConnection.dispose();
-    rotationController.dispose();
+    _peerConnection!.dispose();
+    rotationController!.dispose();
     super.dispose();
   }
 
@@ -70,41 +70,44 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Color(0xFF313F58),
       body: BlocListener(
-        cubit: connectionBloc,
+        bloc: connectionBloc,
         listener: (context, SignalRConnectionState state) {
           if (state.isCallAccepted != null &&
-              state.isCallAccepted &&
+              state.isCallAccepted! &&
               !isAnswered) {
             setState(() {
               isAnswered = true;
             });
-            rotationController.stop();
+            rotationController!.stop();
             tts.speak("تم قبول اتصالك من قبل المتطوع");
           }
-          if (state.isCallAccepted != null && !state.isCallAccepted) {
+          if (state.isCallAccepted != null && !state.isCallAccepted!) {
             tts.speak("قام المتطوع بإنهاء المكالمة");
             connectionBloc.resetCallAcceptance();
             Navigator.pop(context);
           }
           if (state.candidateData != null) {
             print("CANDIDATTTEEEE");
-            _addCandidate(state.candidateData);
+            _addCandidate(state.candidateData!);
             connectionBloc.resetCandidateData();
           }
           if (state.sdpData != null) {
+            // _createPeerConnection().then((pc) {
+            //   _peerConnection = pc;
+            // });
             print("SDDPPPPPPP");
-            _setRemoteDescription(state.sdpData);
+            _setRemoteDescription(state.sdpData!);
             connectionBloc.resetSdpData();
           }
         },
         child: BlocBuilder(
-            cubit: connectionBloc,
+            bloc: connectionBloc,
             builder: (context, SignalRConnectionState state) {
               return WillPopScope(
                 onWillPop: () {
                   connectionBloc.cancelCallRequest();
                   Navigator.pop(context);
-                  return;
+                  return Future.value(true);
                 },
                 child: Container(
                   width: double.maxFinite,
@@ -143,7 +146,7 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
                                 padding: EdgeInsets.all(15),
                                 child: RotationTransition(
                                   turns: Tween(begin: -0.05, end: 0.05)
-                                      .animate(rotationController),
+                                      .animate(rotationController!),
                                   child: Icon(
                                     Icons.local_phone_outlined,
                                     color: Color(0xFF313F58),
@@ -211,7 +214,7 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
         "OfferToReceiveVideo": false,
       },
       "optional": [],
-      'sdpSemantics': 'uinified-plan'
+      'sdpSemantics': 'plan-b'
     };
 
     _localStream = await _getUserMedia();
@@ -219,7 +222,7 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
     RTCPeerConnection pc =
         await createPeerConnection(configuration, offerSdpConstraints);
 
-    pc.addStream(_localStream);
+    pc.addStream(_localStream!);
 
     print("pcccc is $pc");
     pc.onIceCandidate = (e) {
@@ -269,11 +272,11 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
     print(session['candidate']);
     dynamic candidate = new RTCIceCandidate(
         session['candidate'], session['sdpMid'], session['sdpMlineIndex']);
-    await _peerConnection.addCandidate(candidate);
+    await _peerConnection!.addCandidate(candidate);
   }
 
   void _createAnswer() async {
-    RTCSessionDescription description = await _peerConnection
+    RTCSessionDescription description = await _peerConnection!
         .createAnswer({'offerToReceiveAudio': 1, 'offerToReceiveVideo': 0});
 
     var session = parse(description.sdp.toString());
@@ -283,7 +286,7 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
     //       'type': description.type.toString(),
     //     }));
 
-    _peerConnection.setLocalDescription(description);
+    _peerConnection!.setLocalDescription(description);
     connectionBloc.onSendSignal(json.encode(session));
   }
 
@@ -297,7 +300,7 @@ class _CallPageState extends State<CallPage> with TickerProviderStateMixin {
     RTCSessionDescription description = new RTCSessionDescription(sdp, 'offer');
     print(description.toMap());
 
-    await _peerConnection.setRemoteDescription(description);
+    await _peerConnection!.setRemoteDescription(description);
     _createAnswer();
   }
 }

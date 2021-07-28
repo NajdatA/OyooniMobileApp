@@ -10,8 +10,7 @@ abstract class AvailableTimesState implements Built<AvailableTimesState, Availab
 
   bool get isLoading;
 
-  @nullable
-  AvailableTimesEntity get availableTimes;
+  AvailableTimesEntity? get availableTimes;
 
   AvailableTimesState._();
 

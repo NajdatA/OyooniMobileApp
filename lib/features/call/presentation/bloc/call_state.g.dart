@@ -7,7 +7,7 @@ part of call_state;
 // **************************************************************************
 
 class _$CallState extends CallState {
-  factory _$CallState([void Function(CallStateBuilder) updates]) =>
+  factory _$CallState([void Function(CallStateBuilder)? updates]) =>
       (new CallStateBuilder()..update(updates)).build();
 
   _$CallState._() : super._();
@@ -37,20 +37,18 @@ class _$CallState extends CallState {
 }
 
 class CallStateBuilder implements Builder<CallState, CallStateBuilder> {
-  _$CallState _$v;
+  _$CallState? _$v;
 
   CallStateBuilder();
 
   @override
   void replace(CallState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CallState;
   }
 
   @override
-  void update(void Function(CallStateBuilder) updates) {
+  void update(void Function(CallStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

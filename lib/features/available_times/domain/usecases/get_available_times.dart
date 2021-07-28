@@ -10,7 +10,7 @@ import 'package:senior_project/features/login/domain/repository/login_repository
 class GetAvailableTimes extends UseCase<AvailableTimesEntity, NoParams> {
   final AvailableTimesRepository repository;
 
-  GetAvailableTimes({@required this.repository}) : assert(repository != null);
+  GetAvailableTimes({required this.repository});
 
   @override
   Future<Either<Failure, AvailableTimesEntity>> call(params) async {

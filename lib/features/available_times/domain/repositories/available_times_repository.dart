@@ -7,5 +7,5 @@ import 'package:senior_project/features/available_times/domain/entities/times_en
 abstract class AvailableTimesRepository extends BaseRepository {
   Future<Either<Failure, AvailableTimesEntity>> getAvailableTimes();
   Future<Either<Failure, String>> deleteTime(String id);
-  Future<Either<Failure, List<TimesEntity>>> addTime(int index, String from, String to);
+  Future<Either<Failure, List<TimesEntity?>?>> addTime(int index, String from, String to);
 }

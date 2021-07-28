@@ -8,7 +8,7 @@ import 'package:senior_project/features/login/domain/repository/login_repository
 class CheckToken extends UseCase<bool, NoParams> {
   final LoginRepository repository;
 
-  CheckToken({@required this.repository}) : assert(repository != null);
+  CheckToken({required this.repository});
 
   @override
   Future<Either<Failure, bool>> call(params) async {

@@ -16,9 +16,9 @@ class LoginRepositoryImpl extends BaseRepositoryImpl
   final LoginLocalDataSource loginLocalDataSource;
 
   LoginRepositoryImpl(
-      {@required this.loginRemoteDataSource,
-      @required this.loginLocalDataSource,
-      @required NetworkInfo networkInfo})
+      {required this.loginRemoteDataSource,
+      required this.loginLocalDataSource,
+      required NetworkInfo networkInfo})
       : super(
             baseRemoteDataSource: loginRemoteDataSource,
             baseLocalDataSource: loginLocalDataSource,
@@ -35,9 +35,9 @@ class LoginRepositoryImpl extends BaseRepositoryImpl
         if (result == null || result.data == null)
           return Left(ServerFailure(ErrorCode.SERVER_ERROR));
         else {
-          print("token is ${result.data.token}");
-          loginLocalDataSource.updateToken(result.data.token, result.data.refreshToken);
-          return Right(result.data);
+          print("token is ${result.data!.token}");
+          loginLocalDataSource.updateToken(result.data!.token, result.data!.refreshToken);
+          return Right(result.data!);
         }
       } on ServerException catch (e) {
         return Left(ServerFailure(e.errorCode));

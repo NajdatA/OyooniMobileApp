@@ -20,28 +20,28 @@ class _$SignUpState extends SignUpState {
   @override
   final String confirmationPassword;
   @override
-  final ErrorCode error;
+  final ErrorCode? error;
   @override
-  final bool isSuccess;
+  final bool? isSuccess;
   @override
-  final bool isEmailValid;
+  final bool? isEmailValid;
   @override
-  final bool isUsernameValid;
+  final bool? isUsernameValid;
   @override
-  final bool isPasswordValid;
+  final bool? isPasswordValid;
   @override
-  final bool isConfirmationPasswordValid;
+  final bool? isConfirmationPasswordValid;
 
-  factory _$SignUpState([void Function(SignUpStateBuilder) updates]) =>
+  factory _$SignUpState([void Function(SignUpStateBuilder)? updates]) =>
       (new SignUpStateBuilder()..update(updates)).build();
 
   _$SignUpState._(
-      {this.email,
-      this.first,
-      this.last,
-      this.isLoading,
-      this.password,
-      this.confirmationPassword,
+      {required this.email,
+      required this.first,
+      required this.last,
+      required this.isLoading,
+      required this.password,
+      required this.confirmationPassword,
       this.error,
       this.isSuccess,
       this.isEmailValid,
@@ -49,24 +49,14 @@ class _$SignUpState extends SignUpState {
       this.isPasswordValid,
       this.isConfirmationPasswordValid})
       : super._() {
-    if (email == null) {
-      throw new BuiltValueNullFieldError('SignUpState', 'email');
-    }
-    if (first == null) {
-      throw new BuiltValueNullFieldError('SignUpState', 'first');
-    }
-    if (last == null) {
-      throw new BuiltValueNullFieldError('SignUpState', 'last');
-    }
-    if (isLoading == null) {
-      throw new BuiltValueNullFieldError('SignUpState', 'isLoading');
-    }
-    if (password == null) {
-      throw new BuiltValueNullFieldError('SignUpState', 'password');
-    }
-    if (confirmationPassword == null) {
-      throw new BuiltValueNullFieldError('SignUpState', 'confirmationPassword');
-    }
+    BuiltValueNullFieldError.checkNotNull(email, 'SignUpState', 'email');
+    BuiltValueNullFieldError.checkNotNull(first, 'SignUpState', 'first');
+    BuiltValueNullFieldError.checkNotNull(last, 'SignUpState', 'last');
+    BuiltValueNullFieldError.checkNotNull(
+        isLoading, 'SignUpState', 'isLoading');
+    BuiltValueNullFieldError.checkNotNull(password, 'SignUpState', 'password');
+    BuiltValueNullFieldError.checkNotNull(
+        confirmationPassword, 'SignUpState', 'confirmationPassword');
   }
 
   @override
@@ -140,76 +130,77 @@ class _$SignUpState extends SignUpState {
 }
 
 class SignUpStateBuilder implements Builder<SignUpState, SignUpStateBuilder> {
-  _$SignUpState _$v;
+  _$SignUpState? _$v;
 
-  String _email;
-  String get email => _$this._email;
-  set email(String email) => _$this._email = email;
+  String? _email;
+  String? get email => _$this._email;
+  set email(String? email) => _$this._email = email;
 
-  String _first;
-  String get first => _$this._first;
-  set first(String first) => _$this._first = first;
+  String? _first;
+  String? get first => _$this._first;
+  set first(String? first) => _$this._first = first;
 
-  String _last;
-  String get last => _$this._last;
-  set last(String last) => _$this._last = last;
+  String? _last;
+  String? get last => _$this._last;
+  set last(String? last) => _$this._last = last;
 
-  bool _isLoading;
-  bool get isLoading => _$this._isLoading;
-  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
-  String _password;
-  String get password => _$this._password;
-  set password(String password) => _$this._password = password;
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
 
-  String _confirmationPassword;
-  String get confirmationPassword => _$this._confirmationPassword;
-  set confirmationPassword(String confirmationPassword) =>
+  String? _confirmationPassword;
+  String? get confirmationPassword => _$this._confirmationPassword;
+  set confirmationPassword(String? confirmationPassword) =>
       _$this._confirmationPassword = confirmationPassword;
 
-  ErrorCode _error;
-  ErrorCode get error => _$this._error;
-  set error(ErrorCode error) => _$this._error = error;
+  ErrorCode? _error;
+  ErrorCode? get error => _$this._error;
+  set error(ErrorCode? error) => _$this._error = error;
 
-  bool _isSuccess;
-  bool get isSuccess => _$this._isSuccess;
-  set isSuccess(bool isSuccess) => _$this._isSuccess = isSuccess;
+  bool? _isSuccess;
+  bool? get isSuccess => _$this._isSuccess;
+  set isSuccess(bool? isSuccess) => _$this._isSuccess = isSuccess;
 
-  bool _isEmailValid;
-  bool get isEmailValid => _$this._isEmailValid;
-  set isEmailValid(bool isEmailValid) => _$this._isEmailValid = isEmailValid;
+  bool? _isEmailValid;
+  bool? get isEmailValid => _$this._isEmailValid;
+  set isEmailValid(bool? isEmailValid) => _$this._isEmailValid = isEmailValid;
 
-  bool _isUsernameValid;
-  bool get isUsernameValid => _$this._isUsernameValid;
-  set isUsernameValid(bool isUsernameValid) =>
+  bool? _isUsernameValid;
+  bool? get isUsernameValid => _$this._isUsernameValid;
+  set isUsernameValid(bool? isUsernameValid) =>
       _$this._isUsernameValid = isUsernameValid;
 
-  bool _isPasswordValid;
-  bool get isPasswordValid => _$this._isPasswordValid;
-  set isPasswordValid(bool isPasswordValid) =>
+  bool? _isPasswordValid;
+  bool? get isPasswordValid => _$this._isPasswordValid;
+  set isPasswordValid(bool? isPasswordValid) =>
       _$this._isPasswordValid = isPasswordValid;
 
-  bool _isConfirmationPasswordValid;
-  bool get isConfirmationPasswordValid => _$this._isConfirmationPasswordValid;
-  set isConfirmationPasswordValid(bool isConfirmationPasswordValid) =>
+  bool? _isConfirmationPasswordValid;
+  bool? get isConfirmationPasswordValid => _$this._isConfirmationPasswordValid;
+  set isConfirmationPasswordValid(bool? isConfirmationPasswordValid) =>
       _$this._isConfirmationPasswordValid = isConfirmationPasswordValid;
 
   SignUpStateBuilder();
 
   SignUpStateBuilder get _$this {
-    if (_$v != null) {
-      _email = _$v.email;
-      _first = _$v.first;
-      _last = _$v.last;
-      _isLoading = _$v.isLoading;
-      _password = _$v.password;
-      _confirmationPassword = _$v.confirmationPassword;
-      _error = _$v.error;
-      _isSuccess = _$v.isSuccess;
-      _isEmailValid = _$v.isEmailValid;
-      _isUsernameValid = _$v.isUsernameValid;
-      _isPasswordValid = _$v.isPasswordValid;
-      _isConfirmationPasswordValid = _$v.isConfirmationPasswordValid;
+    final $v = _$v;
+    if ($v != null) {
+      _email = $v.email;
+      _first = $v.first;
+      _last = $v.last;
+      _isLoading = $v.isLoading;
+      _password = $v.password;
+      _confirmationPassword = $v.confirmationPassword;
+      _error = $v.error;
+      _isSuccess = $v.isSuccess;
+      _isEmailValid = $v.isEmailValid;
+      _isUsernameValid = $v.isUsernameValid;
+      _isPasswordValid = $v.isPasswordValid;
+      _isConfirmationPasswordValid = $v.isConfirmationPasswordValid;
       _$v = null;
     }
     return this;
@@ -217,14 +208,12 @@ class SignUpStateBuilder implements Builder<SignUpState, SignUpStateBuilder> {
 
   @override
   void replace(SignUpState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SignUpState;
   }
 
   @override
-  void update(void Function(SignUpStateBuilder) updates) {
+  void update(void Function(SignUpStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -232,12 +221,18 @@ class SignUpStateBuilder implements Builder<SignUpState, SignUpStateBuilder> {
   _$SignUpState build() {
     final _$result = _$v ??
         new _$SignUpState._(
-            email: email,
-            first: first,
-            last: last,
-            isLoading: isLoading,
-            password: password,
-            confirmationPassword: confirmationPassword,
+            email: BuiltValueNullFieldError.checkNotNull(
+                email, 'SignUpState', 'email'),
+            first: BuiltValueNullFieldError.checkNotNull(
+                first, 'SignUpState', 'first'),
+            last: BuiltValueNullFieldError.checkNotNull(
+                last, 'SignUpState', 'last'),
+            isLoading: BuiltValueNullFieldError.checkNotNull(
+                isLoading, 'SignUpState', 'isLoading'),
+            password: BuiltValueNullFieldError.checkNotNull(
+                password, 'SignUpState', 'password'),
+            confirmationPassword: BuiltValueNullFieldError.checkNotNull(
+                confirmationPassword, 'SignUpState', 'confirmationPassword'),
             error: error,
             isSuccess: isSuccess,
             isEmailValid: isEmailValid,

@@ -15,7 +15,7 @@ abstract class LoginLocalDataSource extends BaseLocalDataSource {
 class LoginLocalDataSourceImpl extends BaseLocalDataSourceImpl
     implements LoginLocalDataSource {
   LoginLocalDataSourceImpl({
-    @required SharedPreferences sharedPreferences,
+    required SharedPreferences sharedPreferences,
   }) : super(
           sharedPreferences: sharedPreferences,
         );

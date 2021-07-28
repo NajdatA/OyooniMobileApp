@@ -14,11 +14,11 @@ class User extends Equatable {
   final String profileImage;
 
   User(
-      {@required this.id,
-      @required this.username,
-      @required this.phoneNumber,
-      @required this.email,
-      @required this.profileImage});
+      {required this.id,
+      required this.username,
+      required this.phoneNumber,
+      required this.email,
+      required this.profileImage});
 
   @override
   List<Object> get props => [

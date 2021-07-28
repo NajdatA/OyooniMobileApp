@@ -17,9 +17,9 @@ class AvailableTimesRepositoryImpl extends BaseRepositoryImpl
   final BaseLocalDataSource localDataSource;
 
   AvailableTimesRepositoryImpl(
-      {@required this.availableTimesRemoteDataSource,
-        @required this.localDataSource,
-        @required NetworkInfo networkInfo})
+      {required this.availableTimesRemoteDataSource,
+        required this.localDataSource,
+        required NetworkInfo networkInfo})
       : super(
       baseRemoteDataSource: availableTimesRemoteDataSource,
       baseLocalDataSource: localDataSource,
@@ -64,8 +64,8 @@ class AvailableTimesRepositoryImpl extends BaseRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, List<TimesEntity>>> addTime(int index, String from, String to) {
-    return requestWithToken<List<TimesEntity>>((token) async {
+  Future<Either<Failure, List<TimesEntity?>?>> addTime(int index, String from, String to) {
+    return requestWithToken<List<TimesEntity?>?>((token) async {
       try {
         final result =
         await availableTimesRemoteDataSource.addTime(token, index, from, to);

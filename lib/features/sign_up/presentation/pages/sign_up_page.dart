@@ -75,7 +75,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ],
       ),
       body: BlocBuilder(
-          cubit: bloc,
+          bloc: bloc,
           builder: (context, SignUpState state) {
             if (state.error != null) {
               Fluttertoast.showToast(

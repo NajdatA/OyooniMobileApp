@@ -16,8 +16,8 @@ import 'package:senior_project/features/volunteer_main/presentation/pages/volunt
 ///
 
 class GenerateScreen {
-  static Route<dynamic> onGenerate(RouteSettings value) {
-    String name = value.name;
+  static Route<dynamic>? onGenerate(RouteSettings value) {
+    String name = value.name!;
     print("the name is $name");
     final args = value.arguments;
     switch (name) {

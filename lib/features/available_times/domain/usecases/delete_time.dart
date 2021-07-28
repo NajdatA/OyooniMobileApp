@@ -7,13 +7,13 @@ import 'package:senior_project/features/available_times/domain/entities/availabl
 import 'package:senior_project/features/available_times/domain/repositories/available_times_repository.dart';
 import 'package:senior_project/features/login/domain/repository/login_repository.dart';
 
-class DeleteTime extends UseCase<String, DeleteTimeParams> {
+class DeleteTime extends UseCase<String?, DeleteTimeParams> {
   final AvailableTimesRepository repository;
 
-  DeleteTime({@required this.repository}) : assert(repository != null);
+  DeleteTime({required this.repository});
 
   @override
-  Future<Either<Failure, String>> call(params) async {
+  Future<Either<Failure, String?>> call(params) async {
     return await repository.deleteTime(params.id);
   }
 }

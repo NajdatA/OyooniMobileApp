@@ -8,23 +8,23 @@ part 'camera_state.g.dart';
 abstract class CameraState implements Built<CameraState, CameraStateBuilder> {
   bool get isLoading;
 
-  @nullable
-  String get recognizedText;
+  String? get recognizedText;
 
-  @nullable
-  String get captionedImage;
+  String? get captionedImage;
 
-  @nullable
-  String get recognizedBanknote;
+  String? get recognizedBanknote;
 
-  @nullable
-  ErrorCode get error;
+  String? get recognizedColor;
+
+  ErrorCode? get error;
 
   CameraState._();
 
   factory CameraState([updates(CameraStateBuilder b)]) = _$CameraState;
 
   factory CameraState.initial() {
-    return CameraState((b) => b);
+    return CameraState((b) => b
+        ..isLoading = false
+    );
   }
 }

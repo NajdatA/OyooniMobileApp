@@ -14,41 +14,34 @@ class _$LoginState extends LoginState {
   @override
   final String password;
   @override
-  final ErrorCode error;
+  final ErrorCode? error;
   @override
-  final bool isSuccess;
+  final bool? isSuccess;
   @override
-  final bool isEmailValid;
+  final bool? isEmailValid;
   @override
-  final bool isPasswordValid;
+  final bool? isPasswordValid;
   @override
   final bool tokenExist;
 
-  factory _$LoginState([void Function(LoginStateBuilder) updates]) =>
+  factory _$LoginState([void Function(LoginStateBuilder)? updates]) =>
       (new LoginStateBuilder()..update(updates)).build();
 
   _$LoginState._(
-      {this.email,
-      this.isLoading,
-      this.password,
+      {required this.email,
+      required this.isLoading,
+      required this.password,
       this.error,
       this.isSuccess,
       this.isEmailValid,
       this.isPasswordValid,
-      this.tokenExist})
+      required this.tokenExist})
       : super._() {
-    if (email == null) {
-      throw new BuiltValueNullFieldError('LoginState', 'email');
-    }
-    if (isLoading == null) {
-      throw new BuiltValueNullFieldError('LoginState', 'isLoading');
-    }
-    if (password == null) {
-      throw new BuiltValueNullFieldError('LoginState', 'password');
-    }
-    if (tokenExist == null) {
-      throw new BuiltValueNullFieldError('LoginState', 'tokenExist');
-    }
+    BuiltValueNullFieldError.checkNotNull(email, 'LoginState', 'email');
+    BuiltValueNullFieldError.checkNotNull(isLoading, 'LoginState', 'isLoading');
+    BuiltValueNullFieldError.checkNotNull(password, 'LoginState', 'password');
+    BuiltValueNullFieldError.checkNotNull(
+        tokenExist, 'LoginState', 'tokenExist');
   }
 
   @override
@@ -104,53 +97,54 @@ class _$LoginState extends LoginState {
 }
 
 class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
-  _$LoginState _$v;
+  _$LoginState? _$v;
 
-  String _email;
-  String get email => _$this._email;
-  set email(String email) => _$this._email = email;
+  String? _email;
+  String? get email => _$this._email;
+  set email(String? email) => _$this._email = email;
 
-  bool _isLoading;
-  bool get isLoading => _$this._isLoading;
-  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
-  String _password;
-  String get password => _$this._password;
-  set password(String password) => _$this._password = password;
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
 
-  ErrorCode _error;
-  ErrorCode get error => _$this._error;
-  set error(ErrorCode error) => _$this._error = error;
+  ErrorCode? _error;
+  ErrorCode? get error => _$this._error;
+  set error(ErrorCode? error) => _$this._error = error;
 
-  bool _isSuccess;
-  bool get isSuccess => _$this._isSuccess;
-  set isSuccess(bool isSuccess) => _$this._isSuccess = isSuccess;
+  bool? _isSuccess;
+  bool? get isSuccess => _$this._isSuccess;
+  set isSuccess(bool? isSuccess) => _$this._isSuccess = isSuccess;
 
-  bool _isEmailValid;
-  bool get isEmailValid => _$this._isEmailValid;
-  set isEmailValid(bool isEmailValid) => _$this._isEmailValid = isEmailValid;
+  bool? _isEmailValid;
+  bool? get isEmailValid => _$this._isEmailValid;
+  set isEmailValid(bool? isEmailValid) => _$this._isEmailValid = isEmailValid;
 
-  bool _isPasswordValid;
-  bool get isPasswordValid => _$this._isPasswordValid;
-  set isPasswordValid(bool isPasswordValid) =>
+  bool? _isPasswordValid;
+  bool? get isPasswordValid => _$this._isPasswordValid;
+  set isPasswordValid(bool? isPasswordValid) =>
       _$this._isPasswordValid = isPasswordValid;
 
-  bool _tokenExist;
-  bool get tokenExist => _$this._tokenExist;
-  set tokenExist(bool tokenExist) => _$this._tokenExist = tokenExist;
+  bool? _tokenExist;
+  bool? get tokenExist => _$this._tokenExist;
+  set tokenExist(bool? tokenExist) => _$this._tokenExist = tokenExist;
 
   LoginStateBuilder();
 
   LoginStateBuilder get _$this {
-    if (_$v != null) {
-      _email = _$v.email;
-      _isLoading = _$v.isLoading;
-      _password = _$v.password;
-      _error = _$v.error;
-      _isSuccess = _$v.isSuccess;
-      _isEmailValid = _$v.isEmailValid;
-      _isPasswordValid = _$v.isPasswordValid;
-      _tokenExist = _$v.tokenExist;
+    final $v = _$v;
+    if ($v != null) {
+      _email = $v.email;
+      _isLoading = $v.isLoading;
+      _password = $v.password;
+      _error = $v.error;
+      _isSuccess = $v.isSuccess;
+      _isEmailValid = $v.isEmailValid;
+      _isPasswordValid = $v.isPasswordValid;
+      _tokenExist = $v.tokenExist;
       _$v = null;
     }
     return this;
@@ -158,14 +152,12 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
 
   @override
   void replace(LoginState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$LoginState;
   }
 
   @override
-  void update(void Function(LoginStateBuilder) updates) {
+  void update(void Function(LoginStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -173,14 +165,18 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
   _$LoginState build() {
     final _$result = _$v ??
         new _$LoginState._(
-            email: email,
-            isLoading: isLoading,
-            password: password,
+            email: BuiltValueNullFieldError.checkNotNull(
+                email, 'LoginState', 'email'),
+            isLoading: BuiltValueNullFieldError.checkNotNull(
+                isLoading, 'LoginState', 'isLoading'),
+            password: BuiltValueNullFieldError.checkNotNull(
+                password, 'LoginState', 'password'),
             error: error,
             isSuccess: isSuccess,
             isEmailValid: isEmailValid,
             isPasswordValid: isPasswordValid,
-            tokenExist: tokenExist);
+            tokenExist: BuiltValueNullFieldError.checkNotNull(
+                tokenExist, 'LoginState', 'tokenExist'));
     replace(_$result);
     return _$result;
   }

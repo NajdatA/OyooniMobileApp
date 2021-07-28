@@ -11,13 +11,11 @@ class _$VolunteerMainState extends VolunteerMainState {
   final List<String> users;
 
   factory _$VolunteerMainState(
-          [void Function(VolunteerMainStateBuilder) updates]) =>
+          [void Function(VolunteerMainStateBuilder)? updates]) =>
       (new VolunteerMainStateBuilder()..update(updates)).build();
 
-  _$VolunteerMainState._({this.users}) : super._() {
-    if (users == null) {
-      throw new BuiltValueNullFieldError('VolunteerMainState', 'users');
-    }
+  _$VolunteerMainState._({required this.users}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(users, 'VolunteerMainState', 'users');
   }
 
   @override
@@ -50,17 +48,18 @@ class _$VolunteerMainState extends VolunteerMainState {
 
 class VolunteerMainStateBuilder
     implements Builder<VolunteerMainState, VolunteerMainStateBuilder> {
-  _$VolunteerMainState _$v;
+  _$VolunteerMainState? _$v;
 
-  List<String> _users;
-  List<String> get users => _$this._users;
-  set users(List<String> users) => _$this._users = users;
+  List<String>? _users;
+  List<String>? get users => _$this._users;
+  set users(List<String>? users) => _$this._users = users;
 
   VolunteerMainStateBuilder();
 
   VolunteerMainStateBuilder get _$this {
-    if (_$v != null) {
-      _users = _$v.users;
+    final $v = _$v;
+    if ($v != null) {
+      _users = $v.users;
       _$v = null;
     }
     return this;
@@ -68,20 +67,21 @@ class VolunteerMainStateBuilder
 
   @override
   void replace(VolunteerMainState other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$VolunteerMainState;
   }
 
   @override
-  void update(void Function(VolunteerMainStateBuilder) updates) {
+  void update(void Function(VolunteerMainStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
   _$VolunteerMainState build() {
-    final _$result = _$v ?? new _$VolunteerMainState._(users: users);
+    final _$result = _$v ??
+        new _$VolunteerMainState._(
+            users: BuiltValueNullFieldError.checkNotNull(
+                users, 'VolunteerMainState', 'users'));
     replace(_$result);
     return _$result;
   }

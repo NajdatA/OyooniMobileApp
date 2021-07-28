@@ -60,45 +60,45 @@ class AvailableTimesBloc
           if (event.index == 0)
             yield state.rebuild((b) => b
               ..isLoading = false
-              ..availableTimes
-                  .sun
-                  .removeWhere((element) => element.id == event.id));
+              ..availableTimes!
+                  .sun!
+                  .removeWhere((element) => element!.id == event.id));
           else if (event.index == 1)
             yield state.rebuild((b) => b
               ..isLoading = false
-              ..availableTimes
-                  .mon
-                  .removeWhere((element) => element.id == event.id));
+              ..availableTimes!
+                  .mon!
+                  .removeWhere((element) => element!.id == event.id));
           else if (event.index == 2)
             yield state.rebuild((b) => b
               ..isLoading = false
-              ..availableTimes
-                  .tues
-                  .removeWhere((element) => element.id == event.id));
+              ..availableTimes!
+                  .tues!
+                  .removeWhere((element) => element!.id == event.id));
           else if (event.index == 3)
             yield state.rebuild((b) => b
               ..isLoading = false
-              ..availableTimes
-                  .wed
-                  .removeWhere((element) => element.id == event.id));
+              ..availableTimes!
+                  .wed!
+                  .removeWhere((element) => element!.id == event.id));
           else if (event.index == 4)
             yield state.rebuild((b) => b
               ..isLoading = false
-              ..availableTimes
-                  .thurs
-                  .removeWhere((element) => element.id == event.id));
+              ..availableTimes!
+                  .thurs!
+                  .removeWhere((element) => element!.id == event.id));
           else if (event.index == 5)
             yield state.rebuild((b) => b
               ..isLoading = false
-              ..availableTimes
-                  .fri
-                  .removeWhere((element) => element.id == event.id));
+              ..availableTimes!
+                  .fri!
+                  .removeWhere((element) => element!.id == event.id));
           else if (event.index == 6)
             yield state.rebuild((b) => b
               ..isLoading = false
-              ..availableTimes
-                  .sat
-                  .removeWhere((element) => element.id == event.id));
+              ..availableTimes!
+                  .sat!
+                  .removeWhere((element) => element!.id == event.id));
         },
       );
     } else if (event is AddTimeEvent) {
@@ -111,18 +111,18 @@ class AvailableTimesBloc
           yield state.rebuild((b) => b..isLoading = false);
         },
         (r) async* {
-          print("sun length is ${state.availableTimes.sun.length}");
+          print("sun length is ${state.availableTimes!.sun!.length}");
           yield state.rebuild((b) => b
             ..isLoading = false
             ..availableTimes = AvailableTimesEntity(
-                event.index == 0 ? r : b.availableTimes.sun,
-                event.index == 1 ? r : b.availableTimes.mon,
-                event.index == 2 ? r : b.availableTimes.tues,
-                event.index == 3 ? r : b.availableTimes.wed,
-                event.index == 4 ? r : b.availableTimes.thurs,
-                event.index == 5 ? r : b.availableTimes.fri,
-                event.index == 6 ? r : b.availableTimes.sat));
-          print("sun length is ${state.availableTimes.sun.length}");
+                event.index == 0 ? r : b.availableTimes!.sun!,
+                event.index == 1 ? r : b.availableTimes!.mon!,
+                event.index == 2 ? r : b.availableTimes!.tues!,
+                event.index == 3 ? r : b.availableTimes!.wed!,
+                event.index == 4 ? r : b.availableTimes!.thurs!,
+                event.index == 5 ? r : b.availableTimes!.fri!,
+                event.index == 6 ? r : b.availableTimes!.sat!));
+          print("sun length is ${state.availableTimes!.sun!.length}");
         },
       );
     }

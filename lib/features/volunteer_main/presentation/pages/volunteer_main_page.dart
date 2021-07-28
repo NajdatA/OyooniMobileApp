@@ -29,32 +29,32 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-        cubit: bloc,
+        bloc: bloc,
         builder: (context, VolunteerMainState state) {
           return BlocListener(
-            cubit: connectionBloc,
+            bloc: connectionBloc,
             listener: (context, SignalRConnectionState connectionState) {
               if (connectionState.newVIId != null) {
-                bloc.onAddNewHelpRequest(connectionState.newVIId);
+                bloc.onAddNewHelpRequest(connectionState.newVIId!);
                 connectionBloc.resetNewVIId();
               }
               if (connectionState.message != null) {
-                Fluttertoast.showToast(msg: connectionState.message);
+                Fluttertoast.showToast(msg: connectionState.message!);
                 connectionBloc.resetMessage();
               }
               if (connectionState.cancelledVIId != null) {
-                bloc.onCancelHelpRequest(connectionState.cancelledVIId);
+                bloc.onCancelHelpRequest(connectionState.cancelledVIId!);
                 connectionBloc.resetCancelHelpRequest();
               }
               if (connectionState.visuallyImpairedDisconnectionMessage != null) {
                 print("hahaha");
                 Navigator.pop(context);
-                Fluttertoast.showToast(msg: connectionState.visuallyImpairedDisconnectionMessage);
+                Fluttertoast.showToast(msg: connectionState.visuallyImpairedDisconnectionMessage!);
                 connectionBloc.resetVIDisconnectionMessage();
               }
             },
             child: BlocBuilder(
-                cubit: connectionBloc,
+                bloc: connectionBloc,
                 builder: (context, SignalRConnectionState connectionState) {
                   return Scaffold(
                     backgroundColor: Colors.orange[50],

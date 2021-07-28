@@ -19,23 +19,18 @@ abstract class SignUpState implements Built<SignUpState, SignUpStateBuilder> {
 
   String get confirmationPassword;
 
-  @nullable
-  ErrorCode get error;
+  ErrorCode? get error;
 
-  @nullable
-  bool get isSuccess;
 
-  @nullable
-  bool get isEmailValid;
+  bool? get isSuccess;
 
-  @nullable
-  bool get isUsernameValid;
+  bool? get isEmailValid;
 
-  @nullable
-  bool get isPasswordValid;
+  bool? get isUsernameValid;
 
-  @nullable
-  bool get isConfirmationPasswordValid;
+  bool? get isPasswordValid;
+
+  bool? get isConfirmationPasswordValid;
 
   bool get isSignUpEnabled =>
       (isEmailValid ?? false) &&

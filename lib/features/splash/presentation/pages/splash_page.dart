@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return BlocListener(
-        cubit: bloc,
+        bloc: bloc,
         listener: (BuildContext context, SplashState state) {
           if (state.user != null) {
             if (state.user == 'blind') {

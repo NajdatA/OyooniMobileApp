@@ -13,8 +13,8 @@
 //   final String refreshToken;
 //
 //   TokensModel({
-//     @required this.token,
-//     @required this.refreshToken,
+//     required this.token,
+//     required this.refreshToken,
 //   });
 //
 //   factory TokensModel.fromJson(Map<String, dynamic> json) {

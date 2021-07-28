@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:senior_project/core/util/light_theme_colors.dart';
 import 'package:senior_project/core/util/theme_colors.dart';
 
@@ -9,63 +9,63 @@ import 'package:senior_project/core/util/theme_colors.dart';
 /// [CustomTextField] class is the base [TextField] widget for all the text fields in the app
 ///
 class CustomTextField extends StatelessWidget {
-  final ScreenUtil screenUtil = ScreenUtil();
+  // final ScreenUtil screenUtil = ScreenUtil();
 
-  final double height;
-  final String hintText;
-  final Color backgroundColor;
-  final Color hintColor;
-  final Color textColor;
-  final double radius;
-  final double hintFontSize;
-  final double textFontSize;
-  final double width;
-  final double marginTop;
-  final double marginBottom;
-  final double marginRight;
-  final double marginLeft;
-  final double textPaddingTop;
-  final double textPaddingBottom;
-  final double textPaddingRight;
-  final double textPaddingLeft;
-  final bool isDense;
-  final bool expands;
-  final bool alignLabelWithHint;
-  final bool readOnly;
-  final bool obscureText;
-  final int maxLines;
-  final int minLines;
-  final int hintMaxLines;
-  final int textExpandedFlex;
-  final int iconExpandedFlex;
-  final Function onSubmitted;
-  final Function onChanged;
-  final Function onTap;
-  final EdgeInsetsGeometry padding;
-  final TextAlignVertical textAlignVertical;
-  final TextAlign textAlign;
-  final TextDirection textDirection;
-  final TextInputAction textInputAction;
-  final TextInputType keyboardType;
-  final InputBorder inputBorder;
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final CrossAxisAlignment crossAxisAlignment;
-  final BoxConstraints prefixIconConstraints;
-  final FontWeight hintWeight;
-  final Widget icon;
-  final Widget secondIcon;
-  final Widget suffixIcon;
-  final Widget prefixIcon;
-  final List<TextInputFormatter> inputFormatters;
-  final BoxBorder boxBorder;
-  final Color cursorColor;
-  final Color borderColor;
-  final String value;
-  final bool editable;
+  final double? height;
+  final String? hintText;
+  final Color? backgroundColor;
+  final Color? hintColor;
+  final Color? textColor;
+  final double? radius;
+  final double? hintFontSize;
+  final double? textFontSize;
+  final double? width;
+  final double? marginTop;
+  final double? marginBottom;
+  final double? marginRight;
+  final double? marginLeft;
+  final double? textPaddingTop;
+  final double? textPaddingBottom;
+  final double? textPaddingRight;
+  final double? textPaddingLeft;
+  final bool? isDense;
+  final bool? expands;
+  final bool? alignLabelWithHint;
+  final bool? readOnly;
+  final bool? obscureText;
+  final int? maxLines;
+  final int? minLines;
+  final int? hintMaxLines;
+  final int? textExpandedFlex;
+  final int? iconExpandedFlex;
+  final Function? onSubmitted;
+  final Function(String)? onChanged;
+  final Function()? onTap;
+  final EdgeInsetsGeometry? padding;
+  final TextAlignVertical? textAlignVertical;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
+  final InputBorder? inputBorder;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final BoxConstraints? prefixIconConstraints;
+  final FontWeight? hintWeight;
+  final Widget? icon;
+  final Widget? secondIcon;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final List<TextInputFormatter>? inputFormatters;
+  final BoxBorder? boxBorder;
+  final Color? cursorColor;
+  final Color? borderColor;
+  final String? value;
+  final bool? editable;
 
   CustomTextField(
-      {Key key,
+      {Key? key,
       this.value,
       this.height = 80,
       this.hintText = "",
@@ -125,17 +125,17 @@ class CustomTextField extends StatelessWidget {
     if (secondIcon == null)
       return Container(
         margin: EdgeInsets.only(
-          top: screenUtil.setHeight(marginTop),
-          bottom: screenUtil.setHeight(marginBottom),
-          left: screenUtil.setWidth(marginLeft),
-          right: screenUtil.setWidth(marginRight),
+          top: marginTop!,
+          bottom: marginBottom!,
+          left: marginLeft!,
+          right: marginRight!,
         ),
         padding: padding,
-        height: screenUtil.setHeight(height),
-        width: width == null ? null : screenUtil.setWidth(width),
+        height: (height),
+        width: width == null ? null : (width),
         decoration: BoxDecoration(
           color: backgroundColor == null ? Colors.white : backgroundColor,
-          borderRadius: BorderRadius.circular(radius),
+          borderRadius: BorderRadius.circular(radius!),
           border: Border.all(
             color: borderColor ?? ThemeColors.getPrimaryColor(context),
             style: BorderStyle.solid,
@@ -152,20 +152,20 @@ class CustomTextField extends StatelessWidget {
           child: TextFormField(
             enabled: editable ?? true,
             cursorColor: cursorColor,
-            inputFormatters: inputFormatters,
-            obscureText: obscureText,
-            expands: expands,
-            readOnly: readOnly,
+            inputFormatters: inputFormatters!,
+            obscureText: obscureText!,
+            expands: expands!,
+            readOnly: readOnly!,
             textAlignVertical: textAlignVertical,
             maxLines: maxLines,
             minLines: minLines,
             controller: controller,
             focusNode: focusNode,
-            textAlign: textAlign,
+            textAlign: textAlign!,
             textDirection: textDirection,
             initialValue: value ?? null,
             style: TextStyle(
-                color: textColor, fontSize: screenUtil.setSp(textFontSize)),
+                color: textColor, fontSize: (textFontSize)),
             textInputAction: textInputAction,
             keyboardType: keyboardType,
             decoration: new InputDecoration(
@@ -178,56 +178,56 @@ class CustomTextField extends StatelessWidget {
               hintText: hintText,
               alignLabelWithHint: alignLabelWithHint,
               contentPadding: EdgeInsets.only(
-                top: screenUtil.setHeight(textPaddingTop),
-                bottom: screenUtil.setHeight(textPaddingBottom),
-                left: screenUtil.setWidth(textPaddingLeft),
-                right: screenUtil.setWidth(textPaddingRight),
+                top: (textPaddingTop!),
+                bottom: (textPaddingBottom!),
+                left: (textPaddingLeft!),
+                right: (textPaddingRight!),
               ),
               hintStyle: TextStyle(
                 color: hintColor,
                 fontWeight: hintWeight,
-                fontSize: screenUtil.setSp(hintFontSize),
+                fontSize: (hintFontSize),
               ),
               border: inputBorder,
             ),
-            onChanged: onChanged,
-            onTap: onTap,
+            onChanged: onChanged!,
+            onTap: onTap!,
           ),
         ),
       );
     else
       return Container(
         margin: EdgeInsets.only(
-            top: screenUtil.setHeight(marginTop),
-            bottom: screenUtil.setHeight(marginBottom),
-            left: screenUtil.setWidth(marginLeft),
-            right: screenUtil.setWidth(marginRight)),
+            top: (marginTop!),
+            bottom: (marginBottom!),
+            left: (marginLeft!),
+            right: (marginRight!)),
         padding: padding,
-        height: screenUtil.setHeight(height),
-        width: width == null ? null : screenUtil.setWidth(width),
+        height: (height),
+        width: width == null ? null : (width),
         decoration: BoxDecoration(
             color: backgroundColor == null ? Colors.white : backgroundColor,
-            borderRadius: BorderRadius.circular(radius),
+            borderRadius: BorderRadius.circular(radius!),
             border: boxBorder),
         child: Row(
-          crossAxisAlignment: crossAxisAlignment,
+          crossAxisAlignment: crossAxisAlignment!,
           children: [
             Expanded(
-              flex: textExpandedFlex,
+              flex: textExpandedFlex!,
               child: TextFormField(
                 enabled: editable ?? true,
                 textAlignVertical: textAlignVertical,
                 maxLines: maxLines,
-                expands: expands,
-                cursorHeight: screenUtil.setHeight(30),
-                obscureText: obscureText,
-                readOnly: readOnly,
+                expands: expands!,
+                cursorHeight: (30),
+                obscureText: obscureText!,
+                readOnly: readOnly!,
                 controller: controller,
                 focusNode: focusNode,
-                textAlign: textAlign,
+                textAlign: textAlign!,
                 textDirection: textDirection,
                 style: TextStyle(
-                    color: textColor, fontSize: screenUtil.setSp(textFontSize)),
+                    color: textColor, fontSize: (textFontSize)),
                 textInputAction: textInputAction,
                 keyboardType: keyboardType,
                 decoration: new InputDecoration(
@@ -239,14 +239,14 @@ class CustomTextField extends StatelessWidget {
                   hintMaxLines: hintMaxLines,
                   hintText: hintText,
                   contentPadding: EdgeInsets.only(
-                      top: screenUtil.setHeight(textPaddingTop),
-                      bottom: screenUtil.setHeight(textPaddingBottom),
-                      left: screenUtil.setWidth(textPaddingLeft),
-                      right: screenUtil.setWidth(textPaddingRight)),
+                      top: (textPaddingTop!),
+                      bottom: (textPaddingBottom!),
+                      left: (textPaddingLeft!),
+                      right: (textPaddingRight!)),
                   hintStyle: TextStyle(
                     color: hintColor,
                     fontWeight: hintWeight,
-                    fontSize: screenUtil.setSp(hintFontSize),
+                    fontSize: (hintFontSize),
                   ),
                   border: inputBorder,
                 ),
@@ -254,7 +254,7 @@ class CustomTextField extends StatelessWidget {
                 onTap: onTap,
               ),
             ),
-            Expanded(flex: iconExpandedFlex, child: secondIcon)
+            Expanded(flex: iconExpandedFlex!, child: secondIcon!)
           ],
         ),
       );

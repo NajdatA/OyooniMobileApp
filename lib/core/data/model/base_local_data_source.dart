@@ -42,7 +42,7 @@ abstract class BaseLocalDataSource {
   ///   [Future] of void completes after the local data source do its async work
   ///
   ///
-  Future<void> updateToken(
+  Future<bool> updateToken(
     String token,
     String refreshToken,
   );
@@ -71,7 +71,7 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
   final SharedPreferences sharedPreferences;
 
   BaseLocalDataSourceImpl({
-    @required this.sharedPreferences,
+    required this.sharedPreferences,
   });
 
   // Returns the user's token
@@ -102,7 +102,7 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
   }
 
   @override
-  Future<void> updateToken(String token, String refreshToken) {
+  Future<bool> updateToken(String token, String refreshToken) {
     sharedPreferences.setString(
       SharedPreferencesKeys.TOKEN,
       token,
@@ -115,14 +115,16 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
       SharedPreferencesKeys.IS_LOGGED_IN,
       true,
     );
+    return Future.value(true);
   }
 
   @override
-  Future<void> updateLoginToken(String token) {
+  Future<bool> updateLoginToken(String token) {
     sharedPreferences.setString(
       SharedPreferencesKeys.LOGIN_TOKEN,
       token,
     );
+    return Future.value(true);
   }
 
   @override

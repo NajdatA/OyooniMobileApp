@@ -12,7 +12,7 @@ abstract class LoginRemoteDataSource extends BaseRemoteDataSource {
 class LoginRemoteDataSourceImpl extends BaseRemoteDataSourceImpl
     implements LoginRemoteDataSource {
   LoginRemoteDataSourceImpl({
-    @required Dio dio,
+    required Dio dio,
   }) : super(
           dio: dio,
         );

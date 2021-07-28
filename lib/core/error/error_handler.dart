@@ -21,7 +21,7 @@ class ErrorHandler {
   ///   d- With [ErrorCode.SERVER_ERROR]
   ///
   static bool handleRemoteError(Response response) {
-    int statusCode = response.statusCode;
+    int statusCode = response.statusCode!;
     print(response.statusCode);
     // print('412222');
 

@@ -14,20 +14,18 @@ import 'package:flutter_tts/flutter_tts.dart';
 ///
 ///
 class Endpoints {
-  static const SOCKET_URL = 'http://192.168.1.106:5001/hub';
-  static const BASE_URL = 'http://192.168.1.106:5001/api/';
+  static const SOCKET_URL = 'https://192.168.1.66:5001/hub';
+  static const BASE_URL = 'https://192.168.1.66:5001/api/';
 
   static const LOGIN_URL = 'accounts/login';
   static const SIGN_UP_URL = 'accounts/signup';
   static const REFRESH_TOKEN_URL = 'test';
   static const AVAILABLE_TIMES_URL = 'availableTimes';
 
-  static const TEXT_RECOGNITION = 'ai/textRecognition';
-  static const IMAGE_CAPTIONING = 'ai/imageCaptioning';
-  static const BANKNOTE_RECOGNITION = 'ai/banknoteRecognition';
-
-  static String getCategories(bool isExternal) =>
-      '/public/event/${isExternal ? 'external' : 'internal'}/params';
+  static const TEXT_RECOGNITION = 'ai/recognize-text';
+  static const IMAGE_CAPTIONING = 'ai/caption-image';
+  static const BANKNOTE_RECOGNITION = 'ai/recognize-banknote';
+  static const COLOR_RECOGNITION = 'ai/recognize-color';
 }
 
 const OPEN_WEATHER_MAP_API_KEY = 'e6ae5a9cf2d4ece30cbbe6be87ed121b';

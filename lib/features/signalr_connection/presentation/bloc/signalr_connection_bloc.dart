@@ -7,15 +7,14 @@ import 'package:senior_project/core/util/constants.dart';
 import 'package:senior_project/features/signalr_connection/domain/usecase/get_token.dart';
 import 'package:senior_project/features/signalr_connection/presentation/bloc/signalr_connection_event.dart';
 import 'package:senior_project/features/signalr_connection/presentation/bloc/signalr_connection_state.dart';
-import 'package:signalr_client/http_connection_options.dart';
-import 'package:signalr_client/hub_connection.dart';
-import 'package:signalr_client/hub_connection_builder.dart';
+import 'package:signalr_netcore/http_connection_options.dart';
+import 'package:signalr_netcore/hub_connection.dart';
 
 class SignalRConnectionBloc
     extends Bloc<SignalRConnectionEvent, SignalRConnectionState> {
   // final hubConnectionBuilder = HubConnectionBuilder();
   final GetToken getToken;
-  HubConnection connection;
+  HubConnection? connection;
 
   SignalRConnectionBloc(this.getToken)
       : super(SignalRConnectionState.initial());
@@ -71,6 +70,7 @@ class SignalRConnectionBloc
   }
 
   void resetNavigateToCallPage() {
+    print("hahaha");
     add(ResetNavigateToCallPageEvent());
   }
 
@@ -137,18 +137,18 @@ class SignalRConnectionBloc
     } else if (event is AcceptCallEvent) {
       yield* acceptVICall(event, state);
     } else if (event is HangUpEvent) {
-      final hangingUp = await connection.invoke(ServerMethods.hangUp);
+      final hangingUp = await connection!.invoke(ServerMethods.hangUp);
       print("Hanging up is $hangingUp");
       onVIEndCall(Responses.viEndedCall);
     } else if (event is RequestCallingEvent) {
       final isRequested =
-          await connection.invoke(ServerMethods.requestVolunteerHelp);
+          await connection!.invoke(ServerMethods.requestVolunteerHelp);
       print("is requested $isRequested");
       yield state.rebuild((b) => b..navigateToCallPage = true);
     } else if (event is ResetNavigateToCallPageEvent) {
       yield state.rebuild((b) => b..navigateToCallPage = false);
     } else if (event is CancelCallRequestEvent) {
-      final hangingUp = await connection.invoke(ServerMethods.hangUp);
+      final hangingUp = await connection!.invoke(ServerMethods.hangUp);
       print("Hanging up is $hangingUp");
     } else if (event is VolunteerAcceptedCallEvent) {
       yield state.rebuild((b) => b..isCallAccepted = true);
@@ -158,7 +158,7 @@ class SignalRConnectionBloc
       yield state.rebuild((b) => b..isCallAccepted = null);
     } else if (event is SendSignalEvent) {
       print("data to send on send signal is ${event.data}");
-      final response = await connection.invoke(ServerMethods.sendSignal, args: [
+      final response = await connection!.invoke(ServerMethods.sendSignal, args: [
         event.data,
       ]);
       print('signal response is $response');
@@ -187,22 +187,23 @@ class SignalRConnectionBloc
     if (event.isVI) {
       yield state.rebuild(
         (b) => b
-          ..hubConnectionBuilder = b.hubConnectionBuilder.withUrl(
+          ..hubConnectionBuilder = b.hubConnectionBuilder!.withUrl(
             Endpoints.SOCKET_URL,
           ),
       );
       print("hub connection ${state.hubConnectionBuilder}");
       connection = state.hubConnectionBuilder.build();
-      await connection.start();
+      connection!.serverTimeoutInMilliseconds = 500000;
+      await connection!.start();
 
       print("VI is connected");
-      visuallyImpairedEvents(connection);
+      visuallyImpairedEvents(connection!);
     } else {
       final result = await getToken(NoParams());
-      yield* result.fold((l) => null, (r) async* {
+      yield* result.fold((l) async* {}, (r) async* {
         yield state.rebuild(
           (b) => b
-            ..hubConnectionBuilder = b.hubConnectionBuilder.withUrl(
+            ..hubConnectionBuilder = b.hubConnectionBuilder!.withUrl(
               Endpoints.SOCKET_URL,
               options: HttpConnectionOptions(
                 accessTokenFactory: () async {
@@ -214,8 +215,9 @@ class SignalRConnectionBloc
       });
       print("hub connection ${state.hubConnectionBuilder}");
       connection = state.hubConnectionBuilder.build();
-      await connection.start();
-      volunteerEvents(connection);
+      connection!.serverTimeoutInMilliseconds = 500000;
+      await connection!.start();
+      volunteerEvents(connection!);
     }
   }
 
@@ -224,7 +226,7 @@ class SignalRConnectionBloc
     SignalRConnectionState state,
   ) async* {
     final isAccepted =
-        await connection.invoke(ServerMethods.acceptCall, args: [event.id]);
+        await connection!.invoke(ServerMethods.acceptCall, args: [event.id]);
     print("is accepted $isAccepted");
   }
 
@@ -232,37 +234,36 @@ class SignalRConnectionBloc
     /// New VI Requested a call
     connection.on(ServerEvents.newVINeedingHelp, (arguments) {
       print("new vi");
-      print("new vi id is ${arguments[0]}");
-      onAddNewVIId(arguments[0]);
+      onAddNewVIId(arguments![0] as String);
     });
 
     /// Error Occurred
     connection.on(ServerEvents.error, (arguments) {
-      showMessage(arguments[0]);
+      showMessage(arguments![0] as String);
     });
 
     /// Cancelled Help Request
     connection.on(ServerEvents.cancelledHelpRequest, (arguments) {
       print("cancel");
-      onRemoveHelpRequest(arguments[0]);
+      onRemoveHelpRequest(arguments![0] as String);
     });
 
     /// VI Disconnected
     connection.on(ServerEvents.viDisconnected, (arguments) {
       print('vi disconnected');
-      onRemoveHelpRequest(arguments[0]);
+      onRemoveHelpRequest(arguments![0] as String);
     });
 
     /// VI found a volunteer
     connection.on(ServerEvents.viAcceptedByVolunteer, (arguments) {
       print('vi found a caller 2');
-      onRemoveHelpRequest(arguments[0]);
+      onRemoveHelpRequest(arguments![0] as String);
     });
 
     /// Already in a call
     connection.on(ServerEvents.alreadyInCall, (arguments) {
       print('vi found a caller');
-      onRemoveHelpRequest(arguments[0]);
+      onRemoveHelpRequest(arguments![0] as String);
     });
 
     /// Visually Impaired Disconnected
@@ -277,7 +278,7 @@ class SignalRConnectionBloc
 
     /// Volunteer Received Signal
     connection.on(ServerEvents.receivedSignal, (arguments) {
-      onReceiveSignal(arguments[0]);
+      onReceiveSignal(arguments![0] as String);
     });
   }
 
@@ -285,12 +286,12 @@ class SignalRConnectionBloc
     /// Connected Successfully
     connection.on(ServerEvents.connectedSuccessfully, (arguments) {
       print("connected successfully");
-      onAddVIConnectionId(arguments[0]);
+      onAddVIConnectionId(arguments![0] as String);
     });
 
     /// Volunteer Accepted Call
     connection.on(ServerEvents.volunteerAcceptedCall, (arguments) {
-      onVolunteerAcceptedCall(arguments[0]);
+      onVolunteerAcceptedCall(arguments![0] as String);
     });
 
     /// Volunteer Hung Up
@@ -305,7 +306,7 @@ class SignalRConnectionBloc
 
     /// Receive Signal
     connection.on(ServerEvents.receivedSignal, (arguments) {
-      onReceiveSignal(arguments[0]);
+      onReceiveSignal(arguments![0] as String);
     });
   }
 }

@@ -4,24 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/core/error/failures.dart';
 import 'package:senior_project/core/usecases/usecase.dart';
 import 'package:senior_project/features/camera/domain/repositories/camera_repository.dart';
-import 'package:senior_project/features/login/domain/entity/tokens_entity.dart';
-import 'package:senior_project/features/login/domain/repository/login_repository.dart';
 
-class TextRecognition extends UseCase<String, TextRecognitionParams> {
+class ColorRecognition extends UseCase<int, ColorRecognitionParams> {
   final CameraRepository repository;
 
-  TextRecognition({required this.repository});
+  ColorRecognition({required this.repository});
 
   @override
-  Future<Either<Failure, String>> call(params) async {
-    return await repository.textRecognition(params.image);
+  Future<Either<Failure, int>> call(params) async {
+    return await repository.colorRecognition(params.image);
   }
 }
 
-class TextRecognitionParams extends Equatable {
+class ColorRecognitionParams extends Equatable {
   final String image;
 
-  TextRecognitionParams({
+  ColorRecognitionParams({
     required this.image,
   });
 

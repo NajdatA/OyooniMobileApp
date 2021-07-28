@@ -52,9 +52,9 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushNamed(context, NameScreen.VOLUNTEER_MAIN_PAGE);
           }
         },
-        cubit: bloc,
+        bloc: bloc,
         child: BlocBuilder(
-            cubit: bloc,
+            bloc: bloc,
             builder: (context, LoginState state) {
               return ListView(
                 shrinkWrap: true,

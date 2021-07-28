@@ -18,9 +18,9 @@ class SplashRepositoryImpl extends BaseRepositoryImpl
   final BaseRemoteDataSource remoteDataSource;
 
   SplashRepositoryImpl({
-    @required this.splashLocalDataSource,
-    @required this.remoteDataSource,
-    @required NetworkInfo networkInfo,
+    required this.splashLocalDataSource,
+    required this.remoteDataSource,
+    required NetworkInfo networkInfo,
   }) : super(
           baseLocalDataSource: splashLocalDataSource,
           baseRemoteDataSource: remoteDataSource,
@@ -30,6 +30,7 @@ class SplashRepositoryImpl extends BaseRepositoryImpl
   @override
   Future<Either<Failure, String>> getUser() async {
     final getUser = await splashLocalDataSource.getUser;
+    print("get user is $getUser");
     if (getUser != null) {
       if (getUser == "volunteer") {
         final token = await splashLocalDataSource.token;
